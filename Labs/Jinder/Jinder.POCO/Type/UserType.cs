@@ -1,6 +1,6 @@
 ﻿namespace Jinder.Poco.Type
 {
-	enum UserType
+	public enum UserType
 	{
 		Administrator,
 		Candidate,

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Jinder.Poco.Dto
 {
-    class VacancyDto
+    public class VacancyDto
     {
         public Guid UserId { get; set; }
         public Guid Id { get; set; }
