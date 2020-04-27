@@ -105,15 +105,46 @@ namespace Jinder.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromHeader] Guid token, [FromBody] CreateSummaryDto newSummary)
+        [Route("create/")]
+        [ProducesResponseType(typeof(SummaryDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<SummaryDto> Create([FromHeader] Guid token, [FromBody] CreateSummaryDto summaryData)
         {
-            throw new NotSupportedException();
+            try
+            {
+                var currentUserId = ValidateToken(token);
+                return Ok(_summaryService.CreateForUser(currentUserId, summaryData));
+            }
+            catch (AuthenticationException)
+            {
+                return Unauthorized();
+            }
+            catch (ArgumentException)
+            {
+                return BadRequest();
+            }
         }
 
         [HttpDelete]
-        public IActionResult Delete([FromHeader] Guid token, Int32 summaryId)
+        [ProducesResponseType(typeof(SummaryDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<SummaryDto> Delete([FromHeader] Guid token, Int32 summaryId)
         {
-            throw new NotSupportedException();
+            try
+            {
+                var currentUserId = ValidateToken(token);
+                return Ok(_summaryService.Delete(summaryId));
+            }
+            catch (AuthenticationException)
+            {
+                return Unauthorized();
+            }
+            catch (ArgumentException)
+            {
+                return BadRequest();
+            }
         }
     }
 }
