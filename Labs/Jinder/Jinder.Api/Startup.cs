@@ -1,5 +1,6 @@
-using Jinder.Api.Repository;
-using Jinder.Api.Service;
+using Jinder.Core.Services;
+using Jinder.Dal.Repositories;
+using Jinder.Dal.Repositories.Mocks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,7 +24,11 @@ namespace Jinder.Api
         {
             services.TryAddSingleton<IAccessService, FreeAccessService>();
             services.TryAddSingleton<IUserService, UserService>();
+            services.TryAddSingleton<ISummaryService, SummaryService>();
             services.TryAddSingleton<IUserRepository, UserRepositoryMock>();
+            services.TryAddSingleton<ISkillRepository, SkillRepositoryMock>();
+            services.TryAddSingleton<ISpecializationRepository, SpecializationRepositoryMock>();
+            services.TryAddSingleton<ISummaryRepository, SummaryRepositoryMock>();
 
             services.AddControllers();
         }
