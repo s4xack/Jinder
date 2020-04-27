@@ -5,8 +5,8 @@ namespace Jinder.Poco.Dto
 {
     public class SummaryCompilationDto
     {
-        public int UserId { get; set; }
-        public int VacancyId { get; set; }
+        public Int32 UserId { get; set; }
+        public Int32 VacancyId { get; set; }
         public List<SummaryDto> Summaries { get; set; }
     }
 }
