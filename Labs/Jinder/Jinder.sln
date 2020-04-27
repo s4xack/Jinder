@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jinder.Poco", "Jinder.Poco\Jinder.Poco.csproj", "{4B720F32-FF83-4B67-84C6-2E0D79658EB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jinder.Api", "Jinder.Api\Jinder.Api.csproj", "{0B0B919E-9DD1-472A-A46E-C8E7D15D1CCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jinder.Api", "Jinder.Api\Jinder.Api.csproj", "{0B0B919E-9DD1-472A-A46E-C8E7D15D1CCB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jinder.Test", "Jinder.Test\Jinder.Test.csproj", "{E624A733-ABBE-46F7-8470-656D65CEE91A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{0B0B919E-9DD1-472A-A46E-C8E7D15D1CCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B0B919E-9DD1-472A-A46E-C8E7D15D1CCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B0B919E-9DD1-472A-A46E-C8E7D15D1CCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E624A733-ABBE-46F7-8470-656D65CEE91A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E624A733-ABBE-46F7-8470-656D65CEE91A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E624A733-ABBE-46F7-8470-656D65CEE91A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E624A733-ABBE-46F7-8470-656D65CEE91A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
