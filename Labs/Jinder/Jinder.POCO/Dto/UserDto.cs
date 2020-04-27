@@ -1,6 +1,6 @@
 ﻿using System;
-using Jinder.Poco.Model;
-using Jinder.Poco.Type;
+using Jinder.Poco.Models;
+using Jinder.Poco.Types;
 
 namespace Jinder.Poco.Dto
 {

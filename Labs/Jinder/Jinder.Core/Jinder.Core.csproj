@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jinder.Dal\Jinder.Dal.csproj" />
+    <ProjectReference Include="..\Jinder.Poco\Jinder.Poco.csproj" />
+  </ItemGroup>
+
+</Project>
