@@ -1,11 +1,18 @@
 ﻿using System;
 using Jinder.Poco.Models;
 using Jinder.Poco.Types;
+using Newtonsoft.Json;
 
 namespace Jinder.Poco.Dto
 {
     public class UserDto
     {
+        public Int32 Id { get; }
+        public String Name { get; }
+        public String Email { get; }
+        public UserType Type { get; }
+
+        [JsonConstructor]
         private UserDto(Int32 id, String name, String email, UserType type)
         {
             Id = id;
@@ -13,11 +20,6 @@ namespace Jinder.Poco.Dto
             Email = email;
             Type = type;
         }
-
-        public Int32 Id { get; set; }
-        public String Name { get; set; }
-        public String Email { get; set; }
-        public UserType Type { get; set; }
 
         public static UserDto Create(User user)
         {

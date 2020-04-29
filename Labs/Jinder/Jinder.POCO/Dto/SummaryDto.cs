@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using Jinder.Poco.Models;
+using Newtonsoft.Json;
 
 namespace Jinder.Poco.Dto
 {
     public class SummaryDto
     {
-        public SummaryDto()
-        {
-        }
+        public Int32 UserId { get; }
+        public Int32 Id { get; }
+        public String Specialization { get; }
+        public List<String> Skills { get; }
+        public String Information { get; }
 
-        private SummaryDto(Int32 userId, Int32 id, String specialization, List<String> skills, String information)
+        [JsonConstructor]
+        public SummaryDto(Int32 userId, Int32 id, String specialization, List<String> skills, String information)
         {
             UserId = userId;
             Id = id;
@@ -19,12 +23,6 @@ namespace Jinder.Poco.Dto
             Skills = skills;
             Information = information;
         }
-
-        public Int32 UserId { get; set; }
-        public Int32 Id { get; set; }
-        public String Specialization { get; set; }
-        public List<String> Skills { get; set; }
-        public String Information { get; set; }
 
         public static SummaryDto Create(Summary summary)
         {

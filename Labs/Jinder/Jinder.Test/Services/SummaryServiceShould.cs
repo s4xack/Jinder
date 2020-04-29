@@ -47,21 +47,17 @@ namespace Jinder.Test.Services
         {
             // Arrange
             var userId = 4;
-            var summaryData = new CreateSummaryDto
-            {
-                Skills = new List<String> {"Skill1", "Skill3"},
-                Specialization = "Spec2",
-                Information = "Inform"
-            };
+            var summaryData = new CreateSummaryDto(
+                "Spec2",
+                new List<String> {"Skill1", "Skill3"},
+                "Inform");
 
-            var expected = new SummaryDto
-            {
-                Id = 2,
-                UserId = userId,
-                Skills = summaryData.Skills,
-                Specialization = summaryData.Specialization,
-                Information = summaryData.Information
-            };
+            var expected = new SummaryDto(
+                userId,
+                2,
+                summaryData.Specialization,
+                summaryData.Skills,
+                summaryData.Information);
 
             // Act
             var result = _summaryService.CreateForUser(userId, summaryData);
@@ -139,12 +135,10 @@ namespace Jinder.Test.Services
         {
             // Arrange
             var userId = 0;
-            var summaryData = new CreateSummaryDto
-            {
-                Skills = new List<String> {"Skill1", "Skill3"},
-                Specialization = "Spec2",
-                Information = "Inform"
-            };
+            var summaryData = new CreateSummaryDto(
+                "Spec2",
+                new List<String> { "Skill1", "Skill3" },
+                "Inform");
 
             // Assert
             Assert.Throws<ArgumentException>(() => _summaryService.CreateForUser(userId, summaryData));
@@ -155,12 +149,10 @@ namespace Jinder.Test.Services
         {
             // Arrange
             var userId = 1;
-            var summaryData = new CreateSummaryDto
-            {
-                Skills = new List<String> {"Skill1", "Skill3"},
-                Specialization = "Spec2",
-                Information = "Inform"
-            };
+            var summaryData = new CreateSummaryDto(
+                "Spec2",
+                new List<String> { "Skill1", "Skill3" },
+                "Inform");
 
             // Assert
             Assert.Throws<ArgumentException>(() => _summaryService.CreateForUser(userId, summaryData));
