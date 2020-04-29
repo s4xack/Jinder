@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Jinder.Poco.Models;
 using Newtonsoft.Json;
+using Jinder.Poco.Models;
 
 namespace Jinder.Poco.Dto
 {

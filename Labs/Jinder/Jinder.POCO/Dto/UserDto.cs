@@ -1,7 +1,7 @@
 ﻿using System;
+using Newtonsoft.Json;
 using Jinder.Poco.Models;
 using Jinder.Poco.Types;
-using Newtonsoft.Json;
 
 namespace Jinder.Poco.Dto
 {

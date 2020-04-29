@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework;
 using Jinder.Core.Services;
 using Jinder.Dal.Repositories;
 using Jinder.Dal.Repositories.Mocks;
 using Jinder.Poco.Dto;
-using NUnit.Framework;
 
 namespace Jinder.Test.Services
 {
@@ -120,10 +120,11 @@ namespace Jinder.Test.Services
         public void Should_return_summary_for_user_same_as_from_repository()
         {
             // Arrange
-            var expected = SummaryDto.Create(_summaryRepository.GetForUser(1));
+            var userId = 1;
+            var expected = SummaryDto.Create(_summaryRepository.GetForUser(userId));
 
             // Act
-            var result = _summaryService.GetForUser(1);
+            var result = _summaryService.GetForUser(userId);
 
             // Assert
             Assert.That(result != null);
