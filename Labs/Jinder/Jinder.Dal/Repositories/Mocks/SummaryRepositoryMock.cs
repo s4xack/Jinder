@@ -14,28 +14,25 @@ namespace Jinder.Dal.Repositories.Mocks
         {
             _summaries = summaries;
             _newId = 0;
-            foreach (var summary in _summaries) summary.Id = _newId++;
+            foreach (var summary in _summaries) _newId = Math.Max(_newId, summary.Id);
+            _newId++;
         }
 
         public SummaryRepositoryMock() :
             this(new List<Summary>
             {
-                new Summary
-                {
-                    Id = 0,
-                    UserId = 1,
-                    Skills = new List<Skill> {new Skill {Id = 0, Name = "Skill1"}, new Skill {Id = 1, Name = "Skill2"}},
-                    Specialization = new Specialization {Id = 0, Name = "Spec1"},
-                    Information = "Info"
-                },
-                new Summary
-                {
-                    Id = 1,
-                    UserId = 3,
-                    Skills = new List<Skill> {new Skill {Id = 2, Name = "Skill3"}, new Skill {Id = 3, Name = "Skill4"}},
-                    Specialization = new Specialization {Id = 1, Name = "Spec2"},
-                    Information = "Info"
-                }
+                new Summary(
+                    1,
+                    0,
+                    new Specialization(0, "Spec1"),
+                    new List<Skill> {new Skill(0, "Skill1"), new Skill(1, "Skill2")},
+                    "Info"),
+                new Summary(
+                    3,
+                    1,
+                    new Specialization(1, "Spec2"),
+                    new List<Skill> {new Skill(2, "Skill3"), new Skill(3, "Skill4")},
+                    "Info"),
             })
         {
         }
@@ -59,7 +56,6 @@ namespace Jinder.Dal.Repositories.Mocks
 
         public Summary Create(Summary summary)
         {
-            summary.Id = _newId++;
             _summaries.Add(summary);
             return summary;
         }
@@ -75,5 +71,7 @@ namespace Jinder.Dal.Repositories.Mocks
         {
             return _summaries.Exists(s => s.UserId == userId);
         }
+
+        public Int32 NewId { get => _newId++; }
     }
 }

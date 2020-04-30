@@ -14,14 +14,15 @@ namespace Jinder.Dal.Repositories.Mocks
         {
             _specializations = specializations;
             _newId = 0;
-            foreach (var specialization in _specializations) specialization.Id = _newId++;
+            foreach (var specialization in _specializations) _newId = Math.Max(_newId, specialization.Id);
+            _newId++;
         }
 
         public SpecializationRepositoryMock() :
             this(new List<Specialization>
             {
-                new Specialization {Id = 0, Name = "Spec1"},
-                new Specialization {Id = 1, Name = "Spec2"}
+                new Specialization (0, "Spec1"),
+                new Specialization (1, "Spec2")
             })
         {
         }
@@ -45,7 +46,6 @@ namespace Jinder.Dal.Repositories.Mocks
 
         public Specialization Add(Specialization specialization)
         {
-            specialization.Id = _newId++;
             _specializations.Add(specialization);
             return specialization;
         }
@@ -57,5 +57,7 @@ namespace Jinder.Dal.Repositories.Mocks
             _specializations.Remove(specialization);
             return specialization;
         }
+
+        public Int32 NewId { get => _newId; }
     }
 }

@@ -52,15 +52,14 @@ namespace Jinder.Core.Services
                 throw new ArgumentException($"Unable to create recruiter for not candidate user with id {userId}!");
             if (_vacancyRepository.IsHaveForUser(userId))
                 throw new ArgumentException($"Vacancy for user with id {userId} have already created!");
-            var vacancy = new Vacancy
-            {
-                UserId = userId,
-                Specialization = _specializationRepository.GetByName(vacancyData.Specialization),
-                Skills = vacancyData.Skills
+            var vacancy = new Vacancy(
+                userId,
+                _vacancyRepository.NewId,
+                _specializationRepository.GetByName(vacancyData.Specialization),
+                vacancyData.Skills
                     .Select(s => _skillRepository.GetByName(s))
                     .ToList(),
-                Information = vacancyData.Information
-            };
+                vacancyData.Information);
             vacancy = _vacancyRepository.Create(vacancy);
             return VacancyDto.Create(vacancy);
         }

@@ -12,5 +12,6 @@ namespace Jinder.Dal.Repositories
         Vacancy Create(Vacancy vacancy);
         Vacancy Delete(Int32 vacancyId);
         Boolean IsHaveForUser(Int32 userId);
+        Int32 NewId { get; }
     }
 }

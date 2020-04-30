@@ -52,15 +52,14 @@ namespace Jinder.Core.Services
                 throw new ArgumentException($"Unable to create summary for not candidate user with id {userId}!");
             if (_summaryRepository.IsHaveForUser(userId))
                 throw new ArgumentException($"Summary for user with id {userId} have already created!");
-            var summary = new Summary
-            {
-                UserId = userId,
-                Specialization = _specializationRepository.GetByName(summaryData.Specialization),
-                Skills = summaryData.Skills
+            var summary = new Summary(
+                userId,
+                _summaryRepository.NewId,
+                _specializationRepository.GetByName(summaryData.Specialization),
+                summaryData.Skills
                     .Select(s => _skillRepository.GetByName(s))
                     .ToList(),
-                Information = summaryData.Information
-            };
+                summaryData.Information);
             summary = _summaryRepository.Create(summary);
             return SummaryDto.Create(summary);
         }

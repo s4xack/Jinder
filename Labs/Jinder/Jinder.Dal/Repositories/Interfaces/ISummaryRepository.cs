@@ -12,5 +12,6 @@ namespace Jinder.Dal.Repositories
         Summary Create(Summary summary);
         Summary Delete(Int32 summaryId);
         Boolean IsHaveForUser(Int32 userId);
+        Int32 NewId { get; }
     }
 }
