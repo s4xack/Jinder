@@ -6,6 +6,8 @@ using Jinder.Core.Services;
 using Jinder.Dal.Repositories;
 using Jinder.Dal.Repositories.Mocks;
 using Jinder.Poco.Dto;
+using Jinder.Poco.Models;
+using Jinder.Poco.Types;
 
 namespace Jinder.Test.Services
 {
@@ -27,11 +29,104 @@ namespace Jinder.Test.Services
         [SetUp]
         public void SummaryServiceSetUp()
         {
-            _summaryRepository = new SummaryRepositoryMock();
-            _userRepository = new UserRepositoryMock();
-            _skillRepository = new SkillRepositoryMock();
-            _specializationRepository = new SpecializationRepositoryMock();
-            _summaryRepository = new SummaryRepositoryMock();
+            var users = new List<User>
+            {
+                new User
+                {
+                    Email = "0@email.com",
+                    Id = 0,
+                    Name = "Admin",
+                    PasswordHash = string.Empty,
+                    Type = UserType.Administrator
+                },
+                new User
+                {
+                    Email = "1@email.com",
+                    Id = 1,
+                    Name = "Ivan",
+                    PasswordHash = string.Empty,
+                    Type = UserType.Candidate
+                },
+                new User
+                {
+                    Email = "2@email.com",
+                    Id = 2,
+                    Name = "Shepherd",
+                    PasswordHash = string.Empty,
+                    Type = UserType.Recruiter
+                },
+                new User
+                {
+                    Email = "3@email.com",
+                    Id = 3,
+                    Name = "Alex",
+                    PasswordHash = string.Empty,
+                    Type = UserType.Candidate
+                },
+                new User
+                {
+                    Email = "4@email.com",
+                    Id = 4,
+                    Name = "Max",
+                    PasswordHash = string.Empty,
+                    Type = UserType.Candidate
+                },
+                new User
+                {
+                    Email = "5@email.com",
+                    Id = 5,
+                    Name = "Roman",
+                    PasswordHash = string.Empty,
+                    Type = UserType.Recruiter
+                },
+                new User
+                {
+                    Email = "6@email.com",
+                    Id = 6,
+                    Name = "Nick",
+                    PasswordHash = string.Empty,
+                    Type = UserType.Recruiter
+                }
+            };
+
+            var skills = new List<Skill>
+            {
+                new Skill {Id = 0, Name = "Skill1"},
+                new Skill {Id = 2, Name = "Skill2"},
+                new Skill {Id = 3, Name = "Skill3"},
+                new Skill {Id = 4, Name = "Skill4"}
+            };
+
+            var specializations = new List<Specialization>
+            {
+                new Specialization {Id = 0, Name = "Spec1"},
+                new Specialization {Id = 1, Name = "Spec2"}
+            };
+
+            var summaries = new List<Summary>
+            {
+                new Summary
+                {
+                    Id = 0,
+                    UserId = 1,
+                    Skills = new List<Skill> {new Skill {Id = 0, Name = "Skill1"}, new Skill {Id = 1, Name = "Skill2"}},
+                    Specialization = new Specialization {Id = 0, Name = "Spec1"},
+                    Information = "Info"
+                },
+                new Summary
+                {
+                    Id = 1,
+                    UserId = 3,
+                    Skills = new List<Skill> {new Skill {Id = 2, Name = "Skill3"}, new Skill {Id = 3, Name = "Skill4"}},
+                    Specialization = new Specialization {Id = 1, Name = "Spec2"},
+                    Information = "Info"
+                }
+            };
+
+            _userRepository = new UserRepositoryMock(users);
+            _skillRepository = new SkillRepositoryMock(skills);
+            _specializationRepository = new SpecializationRepositoryMock(specializations);
+            _summaryRepository = new SummaryRepositoryMock(summaries);
             _summaryService = new SummaryService(_summaryRepository, _userRepository, _skillRepository,
                 _specializationRepository);
         }

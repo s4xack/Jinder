@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Jinder.Core.Services;
 using Jinder.Dal.Repositories;
 using Jinder.Dal.Repositories.Mocks;
 using Jinder.Poco.Dto;
+using Jinder.Poco.Models;
+using Jinder.Poco.Types;
 using NUnit.Framework;
 
 namespace Jinder.Test.Services
@@ -25,7 +28,67 @@ namespace Jinder.Test.Services
         [SetUp]
         public void UserServiceSetUp()
         {
-            _userRepository = new UserRepositoryMock();
+            var users = new List<User>
+            {
+                new User
+                {
+                    Email = "0@email.com",
+                    Id = 0,
+                    Name = "Admin",
+                    PasswordHash = string.Empty,
+                    Type = UserType.Administrator
+                },
+                new User
+                {
+                    Email = "1@email.com",
+                    Id = 1,
+                    Name = "Ivan",
+                    PasswordHash = string.Empty,
+                    Type = UserType.Candidate
+                },
+                new User
+                {
+                    Email = "2@email.com",
+                    Id = 2,
+                    Name = "Shepherd",
+                    PasswordHash = string.Empty,
+                    Type = UserType.Recruiter
+                },
+                new User
+                {
+                    Email = "3@email.com",
+                    Id = 3,
+                    Name = "Alex",
+                    PasswordHash = string.Empty,
+                    Type = UserType.Candidate
+                },
+                new User
+                {
+                    Email = "4@email.com",
+                    Id = 4,
+                    Name = "Max",
+                    PasswordHash = string.Empty,
+                    Type = UserType.Candidate
+                },
+                new User
+                {
+                    Email = "5@email.com",
+                    Id = 5,
+                    Name = "Roman",
+                    PasswordHash = string.Empty,
+                    Type = UserType.Recruiter
+                },
+                new User
+                {
+                    Email = "6@email.com",
+                    Id = 6,
+                    Name = "Nick",
+                    PasswordHash = string.Empty,
+                    Type = UserType.Recruiter
+                }
+            };
+
+            _userRepository = new UserRepositoryMock(users);
             _userService = new UserService(_userRepository);
         }
 
