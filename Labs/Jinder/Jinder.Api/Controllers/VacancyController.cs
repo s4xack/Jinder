@@ -27,6 +27,7 @@ namespace Jinder.Api.Controllers
         [Route("get/all")]
         [ProducesResponseType(typeof(List<VacancyDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<List<VacancyDto>> GetAll([FromHeader] Guid token)
         {
             try
@@ -37,6 +38,10 @@ namespace Jinder.Api.Controllers
             catch (AuthenticationException)
             {
                 return Unauthorized();
+            }
+            catch (ArgumentException)
+            {
+                return NotFound();
             }
         }
 
