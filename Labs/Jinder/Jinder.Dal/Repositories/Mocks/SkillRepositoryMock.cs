@@ -18,17 +18,6 @@ namespace Jinder.Dal.Repositories.Mocks
             _newId++;
         }
 
-        public SkillRepositoryMock() :
-            this(new List<Skill>
-            {
-                new Skill (0,"Skill1"),
-                new Skill (1,"Skill2"),
-                new Skill (2,"Skill3"),
-                new Skill (3,"Skill4")
-            })
-        {
-        }
-
         public List<Skill> GetAll()
         {
             return _skills;

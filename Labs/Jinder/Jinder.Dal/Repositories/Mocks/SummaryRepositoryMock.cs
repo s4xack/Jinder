@@ -18,25 +18,6 @@ namespace Jinder.Dal.Repositories.Mocks
             _newId++;
         }
 
-        public SummaryRepositoryMock() :
-            this(new List<Summary>
-            {
-                new Summary(
-                    1,
-                    0,
-                    new Specialization(0, "Spec1"),
-                    new List<Skill> {new Skill(0, "Skill1"), new Skill(1, "Skill2")},
-                    "Info"),
-                new Summary(
-                    3,
-                    1,
-                    new Specialization(1, "Spec2"),
-                    new List<Skill> {new Skill(2, "Skill3"), new Skill(3, "Skill4")},
-                    "Info"),
-            })
-        {
-        }
-
         public IEnumerable<Summary> GetAll()
         {
             return _summaries;
