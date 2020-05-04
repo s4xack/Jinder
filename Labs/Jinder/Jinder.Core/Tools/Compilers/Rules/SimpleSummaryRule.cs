@@ -8,10 +8,10 @@ namespace Jinder.Core.Tools.Compilers.Rules
 {
     public class SimpleSummaryRule : IRule<Summary>
     {
-        private readonly String _specialization;
-        private readonly List<String> _skills;
+        private readonly Specialization _specialization;
+        private readonly List<Skill> _skills;
 
-        public SimpleSummaryRule(String specialization, List<String> skills)
+        public SimpleSummaryRule(Specialization specialization, List<Skill> skills)
         {
             _specialization = specialization;
             _skills = skills;
@@ -19,10 +19,10 @@ namespace Jinder.Core.Tools.Compilers.Rules
 
         public Boolean IsSatisfied(Summary summary)
         {
-            return summary.Specialization.Name == _specialization &&
+            return summary.Specialization.Id == _specialization.Id &&
                    summary.Skills
-                       .Select(s => s.Name)
-                       .Where(_skills.Contains)
+                       .Select(s => s.Id)
+                       .Where(_skills.Select(s => s.Id).Contains)
                        .Count() * 2 >= _skills.Count;
         }
     }
