@@ -5,16 +5,18 @@ using Jinder.Poco.Types;
 
 namespace Jinder.Poco.Models
 {
-    public class Suggestion
+    public class SummarySuggestion
     {
-        public Int32 SummaryId { get; }
+        public Int32 Id { get; }
         public Int32 VacancyId { get; }
+        public Summary Summary { get; }
         public SuggestionStatus Status { get; private set; }
 
-        public Suggestion(Int32 summaryId, Int32 vacancyId)
+        public SummarySuggestion(Int32 id, Int32 vacancyId, Summary summary)
         {
-            SummaryId = summaryId;
+            Id = id;
             VacancyId = vacancyId;
+            Summary = summary;
             Status = SuggestionStatus.Ready;
         }
 
