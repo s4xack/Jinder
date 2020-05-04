@@ -14,10 +14,10 @@ namespace Jinder.Api.Controllers
     [Route("api/[controller]")]
     [Produces("application/json")]
     [Consumes("application/json")]
-    public class SummarySuggestionsController : ExtendedController
+    public class SummarySuggestionController : ExtendedController
     {
         private readonly ISummarySuggestionService _summarySuggestionService;
-        public SummarySuggestionsController(ISummarySuggestionService summarySuggestionService, IAccessService accessService) : base(accessService)
+        public SummarySuggestionController(ISummarySuggestionService summarySuggestionService, IAccessService accessService) : base(accessService)
         {
             _summarySuggestionService = summarySuggestionService ?? throw new ArgumentException(nameof(summarySuggestionService));
         }
