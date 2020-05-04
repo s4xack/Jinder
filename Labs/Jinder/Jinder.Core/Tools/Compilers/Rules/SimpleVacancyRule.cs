@@ -8,10 +8,10 @@ namespace Jinder.Core.Tools.Compilers.Rules
 {
     public class SimpleVacancyRule : IRule<Vacancy>
     {
-        private readonly String _specialization;
-        private readonly List<String> _skills;
+        private readonly Specialization _specialization;
+        private readonly List<Skill> _skills;
 
-        public SimpleVacancyRule(String specialization, List<String> skills)
+        public SimpleVacancyRule(Specialization specialization, List<Skill> skills)
         {
             _specialization = specialization;
             _skills = skills;
@@ -19,10 +19,10 @@ namespace Jinder.Core.Tools.Compilers.Rules
 
         public Boolean IsSatisfied(Vacancy vacancy)
         {
-            return vacancy.Specialization.Name == _specialization &&
+            return vacancy.Specialization.Id == _specialization.Id &&
                    vacancy.Skills
-                       .Select(s => s.Name)
-                       .Where(_skills.Contains)
+                       .Select(s => s.Id)
+                       .Where(_skills.Select(s => s.Id).Contains)
                        .Count() * 2 >= _skills.Count;
         }
     }

@@ -7,7 +7,7 @@ namespace Jinder.Dal.Repositories.Mocks
 {
     public class SummarySuggestionRepositoryMock : ISummarySuggestionRepository
     {
-        private List<SummarySuggestion> _summarySuggestions;
+        private readonly List<SummarySuggestion> _summarySuggestions;
         private Int32 _newId;
 
         public SummarySuggestionRepositoryMock(List<SummarySuggestion> summarySuggestions)
