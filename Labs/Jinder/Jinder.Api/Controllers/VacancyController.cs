@@ -20,7 +20,7 @@ namespace Jinder.Api.Controllers
 
         public VacancyController(IVacancyService vacancyService, IAccessService accessService) : base(accessService)
         {
-            _vacancyService = vacancyService ?? throw new ArgumentException(nameof(vacancyService));
+            _vacancyService = vacancyService ?? throw new ArgumentException (nameof(vacancyService));
         }
 
         [HttpGet]
@@ -39,9 +39,9 @@ namespace Jinder.Api.Controllers
             {
                 return Unauthorized();
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
-                return NotFound();
+                return NotFound(e.Message);
             }
         }
 
@@ -61,9 +61,9 @@ namespace Jinder.Api.Controllers
             {
                 return Unauthorized();
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
-                return NotFound();
+                return NotFound(e.Message);
             }
         }
 
@@ -83,9 +83,9 @@ namespace Jinder.Api.Controllers
             {
                 return Unauthorized();
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
-                return NotFound();
+                return NotFound(e.Message);
             }
         }
 
@@ -105,9 +105,9 @@ namespace Jinder.Api.Controllers
             {
                 return Unauthorized();
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
-                return NotFound();
+                return NotFound(e.Message);
             }
         }
 
@@ -127,7 +127,7 @@ namespace Jinder.Api.Controllers
             {
                 return Unauthorized();
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
                 return BadRequest();
             }
@@ -148,7 +148,7 @@ namespace Jinder.Api.Controllers
             {
                 return Unauthorized();
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
                 return BadRequest();
             }

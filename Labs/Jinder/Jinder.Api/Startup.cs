@@ -25,10 +25,14 @@ namespace Jinder.Api
             services.TryAddSingleton<IAccessService, FreeAccessService>();
             services.TryAddSingleton<IUserService, UserService>();
             services.TryAddSingleton<ISummaryService, SummaryService>();
+            services.TryAddSingleton<IVacancyService, VacancyService>();
+            services.TryAddSingleton<ISummarySuggestionService, SummarySuggestionService>();
             services.TryAddSingleton<IUserRepository, UserRepositoryMock>();
             services.TryAddSingleton<ISkillRepository, SkillRepositoryMock>();
             services.TryAddSingleton<ISpecializationRepository, SpecializationRepositoryMock>();
             services.TryAddSingleton<ISummaryRepository, SummaryRepositoryMock>();
+            services.TryAddSingleton<IVacancyRepository, VacancyRepositoryMock>();
+            services.TryAddSingleton<ISummarySuggestionRepository, SummarySuggestionRepositoryMock>();
 
             services.AddControllers();
         }

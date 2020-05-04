@@ -19,7 +19,7 @@ namespace Jinder.Api.Controllers
         private readonly ISummarySuggestionService _summarySuggestionService;
         public SummarySuggestionsController(ISummarySuggestionService summarySuggestionService, IAccessService accessService) : base(accessService)
         {
-            _summarySuggestionService = summarySuggestionService;
+            _summarySuggestionService = summarySuggestionService ?? throw new ArgumentException(nameof(summarySuggestionService));
         }
 
         [HttpGet]
@@ -38,9 +38,9 @@ namespace Jinder.Api.Controllers
             {
                 return Unauthorized();
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
-                return NotFound();
+                return NotFound(e.Message);
             }
         }
 
@@ -60,9 +60,9 @@ namespace Jinder.Api.Controllers
             {
                 return Unauthorized();
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
-                return NotFound();
+                return NotFound(e.Message);
             }
         }
 
@@ -83,9 +83,9 @@ namespace Jinder.Api.Controllers
             {
                 return Unauthorized();
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
-                return NotFound();
+                return NotFound(e.Message);
             }
         }
 
@@ -106,9 +106,9 @@ namespace Jinder.Api.Controllers
             {
                 return Unauthorized();
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
-                return NotFound();
+                return NotFound(e.Message);
             }
         }
 
@@ -129,9 +129,9 @@ namespace Jinder.Api.Controllers
             {
                 return Unauthorized();
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
-                return NotFound();
+                return NotFound(e.Message);
             }
         }
     }

@@ -18,6 +18,10 @@ namespace Jinder.Dal.Repositories.Mocks
                 _newId = Math.Max(_newId, summarySuggestion.Id);
         }
 
+        public SummarySuggestionRepositoryMock() : this(new List<SummarySuggestion>())
+        {
+        }
+
         public SummarySuggestion Get(Int32 suggestionId)
         {
             return _summarySuggestions.FirstOrDefault(s => s.Id == suggestionId) ??

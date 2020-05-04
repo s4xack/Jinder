@@ -20,10 +20,10 @@ namespace Jinder.Core.Services
         public SummarySuggestionService(ISummarySuggestionRepository summarySuggestionRepository,
             IVacancyRepository vacancyRepository, IUserRepository userRepository, ISummaryRepository summaryRepository)
         {
-            _summarySuggestionRepository = summarySuggestionRepository;
-            _vacancyRepository = vacancyRepository;
-            _userRepository = userRepository;
-            _summaryRepository = summaryRepository;
+            _summarySuggestionRepository = summarySuggestionRepository ?? throw new ArgumentException(nameof(summarySuggestionRepository));
+            _vacancyRepository = vacancyRepository ?? throw new ArgumentException(nameof(vacancyRepository));
+            _userRepository = userRepository ?? throw new ArgumentException(nameof(userRepository)); ;
+            _summaryRepository = summaryRepository ?? throw new ArgumentException(nameof(summaryRepository)); ;
         }
 
         private Int32 GetVacancyIdForUser(Int32 userId)

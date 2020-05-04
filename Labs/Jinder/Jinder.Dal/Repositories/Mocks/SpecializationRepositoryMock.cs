@@ -18,6 +18,10 @@ namespace Jinder.Dal.Repositories.Mocks
             _newId++;
         }
 
+        public SpecializationRepositoryMock() : this(new List<Specialization>())
+        {
+        }
+
         public List<Specialization> GetAll()
         {
             return _specializations;

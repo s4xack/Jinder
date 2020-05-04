@@ -54,9 +54,9 @@ namespace Jinder.Api.Controllers
             {
                 return Unauthorized();
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
-                return NotFound();
+                return NotFound(e.Message);
             }
         }
 
@@ -75,9 +75,9 @@ namespace Jinder.Api.Controllers
             {
                 return Unauthorized();
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
-                return NotFound();
+                return NotFound(e.Message);
             }
         }
     }

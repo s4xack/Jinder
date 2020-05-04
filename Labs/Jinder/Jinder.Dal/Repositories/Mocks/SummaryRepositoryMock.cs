@@ -18,6 +18,10 @@ namespace Jinder.Dal.Repositories.Mocks
             _newId++;
         }
 
+        public SummaryRepositoryMock() : this(new List<Summary>())
+        {
+        }
+
         public IEnumerable<Summary> GetAll()
         {
             return _summaries;

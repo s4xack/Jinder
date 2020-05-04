@@ -18,6 +18,10 @@ namespace Jinder.Dal.Repositories.Mocks
             _newId++;
         }
 
+        public VacancyRepositoryMock() : this(new List<Vacancy>())
+        {
+        }
+
 
         public IEnumerable<Vacancy> GetAll()
         {
