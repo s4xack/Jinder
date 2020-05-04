@@ -17,10 +17,10 @@ namespace Jinder.Core.Tools.Compilers.Rules
             _skills = skills;
         }
 
-        public Boolean IsSatisfied(Summary summary)
+        public Boolean IsSatisfied(Summary vacancy)
         {
-            return summary.Specialization.Id == _specialization.Id &&
-                   summary.Skills
+            return vacancy.Specialization.Id == _specialization.Id &&
+                   vacancy.Skills
                        .Select(s => s.Id)
                        .Where(_skills.Select(s => s.Id).Contains)
                        .Count() * 2 >= _skills.Count;
