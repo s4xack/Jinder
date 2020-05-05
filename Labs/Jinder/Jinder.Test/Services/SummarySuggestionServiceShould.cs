@@ -43,7 +43,7 @@ namespace Jinder.Test.Services
                 x => x.GetAll() == summaries);
             _summarySuggestionRepository = new SummarySuggestionRepositoryMock(new List<SummarySuggestion>());
 
-            _summarySuggestionService = new SummarySuggestionService(_summarySuggestionRepository, _vacancyRepository, _userRepository, _summaryRepository);
+            _summarySuggestionService = new SummarySuggestionService(_summarySuggestionRepository, _vacancyRepository, _userRepository, _summaryRepository, Mock.Of<MatchService>());
 
             _rule = new SimpleSummaryRule(specializations[0], new List<Skill>());
         }

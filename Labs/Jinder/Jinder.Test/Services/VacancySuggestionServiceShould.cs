@@ -40,7 +40,7 @@ namespace Jinder.Test.Services
                 x => x.GetAll() == vacancies);
             _vacancySuggestionRepository = new VacancySuggestionRepositoryMock(new List<VacancySuggestion>());
 
-            _vacancySuggestionService = new VacancySuggestionService(_vacancySuggestionRepository, _summaryRepository, _userRepository, _vacancyRepository);
+            _vacancySuggestionService = new VacancySuggestionService(_vacancySuggestionRepository, _summaryRepository, _userRepository, _vacancyRepository, Mock.Of<IMatchService>());
 
             _rule = new SimpleVacancyRule(specializations[0], new List<Skill>());
         }

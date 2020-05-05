@@ -16,14 +16,16 @@ namespace Jinder.Core.Services
         private readonly IVacancyRepository _vacancyRepository;
         private readonly IUserRepository _userRepository;
         private readonly ISummaryRepository _summaryRepository;
+        private readonly IMatchService _matchService;
 
         public SummarySuggestionService(ISummarySuggestionRepository summarySuggestionRepository,
-            IVacancyRepository vacancyRepository, IUserRepository userRepository, ISummaryRepository summaryRepository)
+            IVacancyRepository vacancyRepository, IUserRepository userRepository, ISummaryRepository summaryRepository, IMatchService matchService)
         {
             _summarySuggestionRepository = summarySuggestionRepository ?? throw new ArgumentException(nameof(summarySuggestionRepository));
             _vacancyRepository = vacancyRepository ?? throw new ArgumentException(nameof(vacancyRepository));
             _userRepository = userRepository ?? throw new ArgumentException(nameof(userRepository)); ;
-            _summaryRepository = summaryRepository ?? throw new ArgumentException(nameof(summaryRepository)); ;
+            _summaryRepository = summaryRepository ?? throw new ArgumentException(nameof(summaryRepository));
+            _matchService = matchService ?? throw new ArgumentException(nameof(matchService));
         }
 
         private Int32 GetVacancyIdForUser(Int32 userId)
@@ -103,6 +105,7 @@ namespace Jinder.Core.Services
                 throw new ArgumentException(
                     $"User with id {userId} don't have access for suggestion with id {suggestion.Id}!");
             suggestion.Accept();
+            _matchService.UpdateMatch(suggestion.Summary.Id, vacancyId);
         }
 
         public void RejectSuggestionForUser(Int32 userId, Int32 suggestionId)
