@@ -8,6 +8,8 @@
     <OutputType>Library</OutputType>
 
     <LangVersion>8.0</LangVersion>
+
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>

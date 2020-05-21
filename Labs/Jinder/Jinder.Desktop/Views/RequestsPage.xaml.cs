@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Jinder.Desktop
+namespace Jinder.Desktop.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for RequestsPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class RequestsPage : Page
     {
-        public MainWindow()
+        public RequestsPage()
         {
             InitializeComponent();
         }
