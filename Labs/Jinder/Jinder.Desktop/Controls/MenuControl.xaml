@@ -50,6 +50,13 @@
                         <ui:SymbolIcon Symbol="Contact" />
                     </mah:HamburgerMenuIconItem.Icon>
                 </mah:HamburgerMenuIconItem>
+                <mah:HamburgerMenuIconItem
+                    Label="Exit"
+                    Command="{Binding BackToStartCommand}">
+                    <mah:HamburgerMenuIconItem.Icon>
+                        <ui:SymbolIcon Symbol="Back" />
+                    </mah:HamburgerMenuIconItem.Icon>
+                </mah:HamburgerMenuIconItem>
             </mah:HamburgerMenuItemCollection>
         </ui:HamburgerMenuEx.OptionsItemsSource>
 

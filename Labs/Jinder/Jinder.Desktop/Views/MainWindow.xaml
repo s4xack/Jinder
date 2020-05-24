@@ -9,9 +9,12 @@
         xmlns:controls="clr-namespace:Jinder.Desktop.Controls"
         xmlns:viewModels="clr-namespace:Jinder.Desktop.ViewModels"
         ui:WindowHelper.UseModernWindowStyle="True"
-        mc:Ignorable="d">
+        mc:Ignorable="d"
+        Width="auto"
+        Height="auto"
+        Title="Jinder">
     <Window.DataContext>
-        <viewModels:MainWindowViewModel></viewModels:MainWindowViewModel>
+        <viewModels:MainWindowViewModel />
     </Window.DataContext>
-    <controls:MenuControl></controls:MenuControl>
+    <controls:MenuControl />
 </Window>

@@ -10,7 +10,7 @@ namespace Jinder.Desktop
 
         public static void Register(MenuViewModel mainWindowViewModel)
         {
-            _menuViewModel ??= mainWindowViewModel;
+            _menuViewModel = mainWindowViewModel;
         }
 
         public static void NavigateTo(Page page)

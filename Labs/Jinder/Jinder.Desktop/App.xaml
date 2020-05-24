@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Jinder.Desktop"
              xmlns:ui="http://schemas.modernwpf.com/2019"
-             StartupUri="Views/MainWindow.xaml">
+             StartupUri="Views/StartWindow.xaml"
+             ShutdownMode="OnLastWindowClose">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

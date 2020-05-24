@@ -11,4 +11,17 @@
     <PackageReference Include="ModernWpfUI.MahApps" Version="0.8.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Jinder.Poco\Jinder.Poco.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Assets\Candidate.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Recruiter.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

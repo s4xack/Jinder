@@ -13,7 +13,7 @@ namespace Jinder.Poco.Dto
         public UserType Type { get; }
 
         [JsonConstructor]
-        private UserDto(Int32 id, String name, String email, UserType type)
+        public UserDto(Int32 id, String name, String email, UserType type)
         {
             Id = id;
             Name = name;
