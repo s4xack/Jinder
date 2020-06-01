@@ -30,17 +30,17 @@ namespace Jinder.Core.Services
 
         private Int32 GetVacancyIdForUser(Int32 userId)
         {
-            var user = _userRepository.Get(userId);
+            User user = _userRepository.Get(userId);
             if (user.Type != UserType.Recruiter)
                 throw new ArgumentException($"User with id {userId} is not recruiter!");
-            var vacancy = _vacancyRepository.GetForUser(userId);
+            Vacancy vacancy = _vacancyRepository.GetForUser(userId);
             return vacancy.Id;
         }
 
         private IEnumerable<SummarySuggestion> GetAllForUser(Int32 userId)
         {
-            var vacancyId = GetVacancyIdForUser(userId);
-            var suggestions = _summarySuggestionRepository.GetAllForVacancy(vacancyId);
+            Int32 vacancyId = GetVacancyIdForUser(userId);
+            IEnumerable<SummarySuggestion> suggestions = _summarySuggestionRepository.GetAllForVacancy(vacancyId);
             if (!suggestions.Any())
                 suggestions = CompileForVacancy(vacancyId);
             return suggestions;
@@ -48,13 +48,13 @@ namespace Jinder.Core.Services
 
         private IEnumerable<SummarySuggestion> CompileForVacancy(Int32 vacancyId)
         {
-            var vacancy = _vacancyRepository.Get(vacancyId);
+            Vacancy vacancy = _vacancyRepository.Get(vacancyId);
 
             var compiler = new SummaryCompiler();
             var rule = new SimpleSummaryRule(vacancy.Specialization, vacancy.Skills);
-            var summaries = compiler.Compile(_summaryRepository.GetAll(), rule);
+            IEnumerable<Summary> summaries = compiler.Compile(_summaryRepository.GetAll(), rule);
 
-            var summarySuggestions =
+            IEnumerable<SummarySuggestion> summarySuggestions =
                 summaries.Select(s => new SummarySuggestion(_summarySuggestionRepository.NewId, vacancyId, s));
             summarySuggestions = _summarySuggestionRepository.Add(summarySuggestions);
 
@@ -66,7 +66,7 @@ namespace Jinder.Core.Services
 
         private IEnumerable<SummarySuggestion> ResetSkippedUser(Int32 userId)
         {
-            var summarySuggestions =
+            IEnumerable<SummarySuggestion> summarySuggestions =
                 GetAllForUser(userId).Where(s => s.Status == SuggestionStatus.Skipped);
             foreach (var summarySuggestion in summarySuggestions)
                 summarySuggestion.Reset();
@@ -74,7 +74,7 @@ namespace Jinder.Core.Services
         }
         private IEnumerable<SummarySuggestion> GetAllReadyForUser(Int32 userId)
         {
-            var summarySuggestions = GetAllForUser(userId)
+            IEnumerable<SummarySuggestion> summarySuggestions = GetAllForUser(userId)
                 .Where(s => s.Status == SuggestionStatus.Ready);
             if (!summarySuggestions.Any())
                 ResetSkippedUser(userId);
@@ -85,7 +85,7 @@ namespace Jinder.Core.Services
 
         public List<SummarySuggestionDto> SuggestAllForUser(Int32 userId)
         {
-            var summarySuggestions = GetAllReadyForUser(userId);
+            IEnumerable<SummarySuggestion> summarySuggestions = GetAllReadyForUser(userId);
             return summarySuggestions
                 .Select(SummarySuggestionDto.Create)
                 .ToList();
@@ -93,14 +93,14 @@ namespace Jinder.Core.Services
 
         public SummarySuggestionDto SuggestForUser(Int32 userId)
         {
-            var summarySuggestions = GetAllReadyForUser(userId);
+            IEnumerable<SummarySuggestion> summarySuggestions = GetAllReadyForUser(userId);
             return SummarySuggestionDto.Create(summarySuggestions.FirstOrDefault());
         }
 
         public void AcceptSuggestionForUser(Int32 userId, Int32 suggestionId)
         {
-            var vacancyId = GetVacancyIdForUser(userId);
-            var suggestion = _summarySuggestionRepository.Get(suggestionId);
+            Int32 vacancyId = GetVacancyIdForUser(userId);
+            SummarySuggestion suggestion = _summarySuggestionRepository.Get(suggestionId);
             if (suggestion.VacancyId != vacancyId)
                 throw new ArgumentException(
                     $"User with id {userId} don't have access for suggestion with id {suggestion.Id}!");
@@ -110,8 +110,8 @@ namespace Jinder.Core.Services
 
         public void RejectSuggestionForUser(Int32 userId, Int32 suggestionId)
         {
-            var vacancyId = GetVacancyIdForUser(userId);
-            var suggestion = _summarySuggestionRepository.Get(suggestionId);
+            Int32 vacancyId = GetVacancyIdForUser(userId);
+            SummarySuggestion suggestion = _summarySuggestionRepository.Get(suggestionId);
             if (suggestion.VacancyId != vacancyId)
                 throw new ArgumentException(
                     $"User with id {userId} don't have access for suggestion with id {suggestion.Id}!");
@@ -120,8 +120,8 @@ namespace Jinder.Core.Services
 
         public void SkipSuggestionForUser(Int32 userId, Int32 suggestionId)
         {
-            var vacancyId = GetVacancyIdForUser(userId);
-            var suggestion = _summarySuggestionRepository.Get(suggestionId);
+            Int32 vacancyId = GetVacancyIdForUser(userId);
+            SummarySuggestion suggestion = _summarySuggestionRepository.Get(suggestionId);
             if (suggestion.VacancyId != vacancyId)
                 throw new ArgumentException(
                     $"User with id {userId} don't have access for suggestion with id {suggestion.Id}!");

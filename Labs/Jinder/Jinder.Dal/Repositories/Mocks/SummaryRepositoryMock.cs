@@ -47,7 +47,7 @@ namespace Jinder.Dal.Repositories.Mocks
 
         public Summary Delete(Int32 summaryId)
         {
-            var summary = _summaries.FirstOrDefault(s => s.Id == summaryId) ?? throw new ArgumentException();
+            Summary summary = _summaries.FirstOrDefault(s => s.Id == summaryId) ?? throw new ArgumentException();
             _summaries.Remove(summary);
             return summary;
         }

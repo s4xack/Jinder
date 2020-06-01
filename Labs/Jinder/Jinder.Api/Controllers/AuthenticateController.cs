@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Jinder.Api.Controllers
 {
-    public class ExtendedController : ControllerBase
+    public class AuthenticateController : ControllerBase
     {
         private readonly IAccessService _accessService;
 
-        public ExtendedController(IAccessService accessService)
+        public AuthenticateController(IAccessService accessService)
         {
             _accessService = accessService ?? throw new ArgumentException(nameof(accessService));
         }

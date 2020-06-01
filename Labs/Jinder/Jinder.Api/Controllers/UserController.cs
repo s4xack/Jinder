@@ -12,7 +12,7 @@ namespace Jinder.Api.Controllers
     [Route("api/[controller]")]
     [Produces("application/json")]
     [Consumes("application/json")]
-    public class UserController : ExtendedController
+    public class UserController : AuthenticateController
     {
         private readonly IUserService _userService;
 
@@ -68,7 +68,7 @@ namespace Jinder.Api.Controllers
         {
             try
             {
-                var currentUserId = ValidateToken(token);
+                Int32 currentUserId = ValidateToken(token);
                 return Ok(_userService.Get(currentUserId));
             }
             catch (AuthenticationException)

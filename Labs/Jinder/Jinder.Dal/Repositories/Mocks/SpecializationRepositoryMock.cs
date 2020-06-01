@@ -47,8 +47,8 @@ namespace Jinder.Dal.Repositories.Mocks
 
         public Specialization Delete(Int32 specializationId)
         {
-            var specialization = _specializations.FirstOrDefault(s => s.Id == specializationId) ??
-                                 throw new ArgumentException($"No skill with id {specializationId}");
+            Specialization specialization = _specializations.FirstOrDefault(s => s.Id == specializationId) ??
+                                            throw new ArgumentException($"No skill with id {specializationId}");
             _specializations.Remove(specialization);
             return specialization;
         }

@@ -14,7 +14,7 @@ namespace Jinder.Api.Controllers
     [Route("api/[controller]")]
     [Produces("application/json")]
     [Consumes("application/json")]
-    public class VacancySuggestionController : ExtendedController
+    public class VacancySuggestionController : AuthenticateController
     {
         private readonly IVacancySuggestionService _vacancySuggestionService;
         public VacancySuggestionController(IVacancySuggestionService vacancySuggestionService, IAccessService accessService) : base(accessService)
@@ -31,7 +31,7 @@ namespace Jinder.Api.Controllers
         {
             try
             {
-                var currentUserId = ValidateToken(token);
+                Int32 currentUserId = ValidateToken(token);
                 return Ok(_vacancySuggestionService.SuggestAllForUser(currentUserId));
             }
             catch (AuthenticationException)
@@ -53,7 +53,7 @@ namespace Jinder.Api.Controllers
         {
             try
             {
-                var currentUserId = ValidateToken(token);
+                Int32 currentUserId = ValidateToken(token);
                 return Ok(_vacancySuggestionService.SuggestForUser(currentUserId));
             }
             catch (AuthenticationException)
@@ -75,7 +75,7 @@ namespace Jinder.Api.Controllers
         {
             try
             {
-                var currentUserId = ValidateToken(token);
+                Int32 currentUserId = ValidateToken(token);
                 _vacancySuggestionService.AcceptSuggestionForUser(currentUserId, suggestionId);
                 return Ok();
             }
@@ -98,7 +98,7 @@ namespace Jinder.Api.Controllers
         {
             try
             {
-                var currentUserId = ValidateToken(token);
+                Int32 currentUserId = ValidateToken(token);
                 _vacancySuggestionService.RejectSuggestionForUser(currentUserId, suggestionId);
                 return Ok();
             }
@@ -121,7 +121,7 @@ namespace Jinder.Api.Controllers
         {
             try
             {
-                var currentUserId = ValidateToken(token);
+                Int32 currentUserId = ValidateToken(token);
                 _vacancySuggestionService.SkipSuggestionForUser(currentUserId, suggestionId);
                 return Ok();
             }

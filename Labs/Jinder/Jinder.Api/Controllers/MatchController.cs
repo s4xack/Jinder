@@ -14,7 +14,7 @@ namespace Jinder.Api.Controllers
     [Route("api/[controller]")]
     [Produces("application/json")]
     [Consumes("application/json")]
-    public class MatchController : ExtendedController
+    public class MatchController : AuthenticateController
     {
         private readonly IMatchService _matchService;
 
@@ -32,7 +32,7 @@ namespace Jinder.Api.Controllers
         {
             try
             {
-                var currentUserId = ValidateToken(token);
+                Int32 currentUserId = ValidateToken(token);
                 return Ok(_matchService.GetAllForCandidate(currentUserId));
             }
             catch (AuthenticationException)
@@ -54,7 +54,7 @@ namespace Jinder.Api.Controllers
         {
             try
             {
-                var currentUserId = ValidateToken(token);
+                Int32 currentUserId = ValidateToken(token);
                 return Ok(_matchService.GetAllForRecruiter(currentUserId));
             }
             catch (AuthenticationException)

@@ -47,7 +47,7 @@ namespace Jinder.Core.Services
 
         public VacancyDto CreateForUser(Int32 userId, CreateVacancyDto vacancyData)
         {
-            var user = _userRepository.Get(userId);
+            User user = _userRepository.Get(userId);
             if (user.Type != UserType.Recruiter)
                 throw new ArgumentException($"Unable to create recruiter for not candidate user with id {userId}!");
             if (_vacancyRepository.IsHaveForUser(userId))

@@ -14,7 +14,7 @@ namespace Jinder.Api.Controllers
     [Route("api/[controller]")]
     [Produces("application/json")]
     [Consumes("application/json")]
-    public class VacancyController : ExtendedController
+    public class VacancyController : AuthenticateController
     {
         private readonly IVacancyService _vacancyService;
 
@@ -98,7 +98,7 @@ namespace Jinder.Api.Controllers
         {
             try
             {
-                var currentUserId = ValidateToken(token);
+                Int32 currentUserId = ValidateToken(token);
                 return Ok(_vacancyService.GetForUser(currentUserId));
             }
             catch (AuthenticationException)
@@ -120,7 +120,7 @@ namespace Jinder.Api.Controllers
         {
             try
             {
-                var currentUserId = ValidateToken(token);
+                Int32 currentUserId = ValidateToken(token);
                 return Ok(_vacancyService.CreateForUser(currentUserId, vacancyData));
             }
             catch (AuthenticationException)
@@ -141,7 +141,7 @@ namespace Jinder.Api.Controllers
         {
             try
             {
-                var currentUserId = ValidateToken(token);
+                Int32 currentUserId = ValidateToken(token);
                 return Ok(_vacancyService.Delete(vacancyId));
             }
             catch (AuthenticationException)

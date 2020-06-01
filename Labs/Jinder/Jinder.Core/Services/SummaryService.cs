@@ -47,7 +47,7 @@ namespace Jinder.Core.Services
 
         public SummaryDto CreateForUser(Int32 userId, CreateSummaryDto summaryData)
         {
-            var user = _userRepository.Get(userId);
+            User user = _userRepository.Get(userId);
             if (user.Type != UserType.Candidate)
                 throw new ArgumentException($"Unable to create summary for not candidate user with id {userId}!");
             if (_summaryRepository.IsHaveForUser(userId))

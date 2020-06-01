@@ -14,7 +14,7 @@ namespace Jinder.Api.Controllers
     [Route("api/[controller]")]
     [Produces("application/json")]
     [Consumes("application/json")]
-    public class SummarySuggestionController : ExtendedController
+    public class SummarySuggestionController : AuthenticateController
     {
         private readonly ISummarySuggestionService _summarySuggestionService;
         public SummarySuggestionController(ISummarySuggestionService summarySuggestionService, IAccessService accessService) : base(accessService)
@@ -31,7 +31,7 @@ namespace Jinder.Api.Controllers
         {
             try
             {
-                var currentUserId = ValidateToken(token);
+                Int32 currentUserId = ValidateToken(token);
                 return Ok(_summarySuggestionService.SuggestAllForUser(currentUserId));
             }
             catch (AuthenticationException)
@@ -53,7 +53,7 @@ namespace Jinder.Api.Controllers
         {
             try
             {
-                var currentUserId = ValidateToken(token);
+                Int32 currentUserId = ValidateToken(token);
                 return Ok(_summarySuggestionService.SuggestForUser(currentUserId));
             }
             catch (AuthenticationException)
@@ -75,7 +75,7 @@ namespace Jinder.Api.Controllers
         {
             try
             {
-                var currentUserId = ValidateToken(token);
+                Int32 currentUserId = ValidateToken(token);
                 _summarySuggestionService.AcceptSuggestionForUser(currentUserId, suggestionId);
                 return Ok();
             }
@@ -98,7 +98,7 @@ namespace Jinder.Api.Controllers
         {
             try
             {
-                var currentUserId = ValidateToken(token);
+                Int32 currentUserId = ValidateToken(token);
                 _summarySuggestionService.RejectSuggestionForUser(currentUserId, suggestionId);
                 return Ok();
             }
@@ -121,7 +121,7 @@ namespace Jinder.Api.Controllers
         {
             try
             {
-                var currentUserId = ValidateToken(token);
+                Int32 currentUserId = ValidateToken(token);
                 _summarySuggestionService.SkipSuggestionForUser(currentUserId, suggestionId);
                 return Ok();
             }

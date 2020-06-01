@@ -12,7 +12,7 @@ namespace Jinder.Api.Controllers
     [Route("api/[controller]")]
     [Produces("application/json")]
     [Consumes("application/json")]
-    public class SummaryController : ExtendedController
+    public class SummaryController : AuthenticateController
     {
         private readonly ISummaryService _summaryService;
 
@@ -96,7 +96,7 @@ namespace Jinder.Api.Controllers
         {
             try
             {
-                var currentUserId = ValidateToken(token);
+                Int32 currentUserId = ValidateToken(token);
                 return Ok(_summaryService.GetForUser(currentUserId));
             }
             catch (AuthenticationException)
@@ -118,7 +118,7 @@ namespace Jinder.Api.Controllers
         {
             try
             {
-                var currentUserId = ValidateToken(token);
+                Int32 currentUserId = ValidateToken(token);
                 return Ok(_summaryService.CreateForUser(currentUserId, summaryData));
             }
             catch (AuthenticationException)
@@ -139,7 +139,7 @@ namespace Jinder.Api.Controllers
         {
             try
             {
-                var currentUserId = ValidateToken(token);
+                Int32 currentUserId = ValidateToken(token);
                 return Ok(_summaryService.Delete(summaryId));
             }
             catch (AuthenticationException)
