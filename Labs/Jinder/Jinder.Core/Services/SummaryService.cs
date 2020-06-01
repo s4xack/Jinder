@@ -50,8 +50,10 @@ namespace Jinder.Core.Services
             User user = _userRepository.Get(userId);
             if (user.Type != UserType.Candidate)
                 throw new ArgumentException($"Unable to create summary for not candidate user with id {userId}!");
+
             if (_summaryRepository.IsHaveForUser(userId))
                 throw new ArgumentException($"Summary for user with id {userId} have already created!");
+
             var summary = new Summary(
                 userId,
                 _summaryRepository.NewId,
@@ -61,6 +63,7 @@ namespace Jinder.Core.Services
                     .ToList(),
                 summaryData.Information);
             summary = _summaryRepository.Create(summary);
+
             return SummaryDto.Create(summary);
         }
 
