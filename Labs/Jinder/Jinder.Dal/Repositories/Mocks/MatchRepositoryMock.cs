@@ -15,7 +15,7 @@ namespace Jinder.Dal.Repositories.Mocks
             _matches = matches;
             _newId = 0;
             foreach (var match in matches)
-                _newId = Math.Max(_newId, match.Id);
+                match.Id = _newId++;
         }
 
         public MatchRepositoryMock() : this(new List<Match>())
@@ -40,10 +40,9 @@ namespace Jinder.Dal.Repositories.Mocks
 
         public Match Add(Match match)
         {
+            match.Id = _newId++;
             _matches.Add(match);
             return match;
         }
-
-        public Int32 NewId => _newId++;
     }
 }

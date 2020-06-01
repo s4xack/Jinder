@@ -75,7 +75,7 @@ namespace Jinder.Core.Services
         {
             Match match = _matchRepository.GetAllForSummary(summaryId).FirstOrDefault(m => m.VacancyId == vacancyId);
             if (match is null)
-                _matchRepository.Add(new Match(_matchRepository.NewId, summaryId, vacancyId));
+                _matchRepository.Add(new Match(summaryId, vacancyId));
             else
                 match.Update();
         }

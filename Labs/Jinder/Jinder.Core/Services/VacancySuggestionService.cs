@@ -58,7 +58,7 @@ namespace Jinder.Core.Services
             IEnumerable<Vacancy> summaries = compiler.Compile(_vacancyRepository.GetAll(), rule);
 
             IReadOnlyCollection<VacancySuggestion> vacancySuggestions =
-                summaries.Select(s => new VacancySuggestion(_vacancySuggestionRepository.NewId, summaryId, s)).ToList();
+                summaries.Select(s => new VacancySuggestion(summaryId, s)).ToList();
             vacancySuggestions = _vacancySuggestionRepository.Add(vacancySuggestions).ToList();
 
             if (!vacancySuggestions.Any())
@@ -81,6 +81,9 @@ namespace Jinder.Core.Services
                 .Where(s => s.Status == SuggestionStatus.Ready).ToList();
             if (!vacancySuggestions.Any())
                 ResetSkippedUser(userId);
+
+            vacancySuggestions = GetAllForUser(userId)
+                .Where(s => s.Status == SuggestionStatus.Ready).ToList();
             if (!vacancySuggestions.Any())
                 throw new ArgumentException("It's no suggestion for summary! Change summary or try later.");
             return vacancySuggestions;

@@ -9,9 +9,15 @@ namespace Jinder.Dal.Repositories.Mocks
     public class UserRepositoryMock : IUserRepository
     {
         private readonly List<User> _users;
+        private Int32 _newId;
 
         public UserRepositoryMock(List<User> users)
         {
+            _newId = 0;
+            foreach (var user in users)
+            {
+                user.Id = _newId++;
+            }
             _users = users;
         }
 

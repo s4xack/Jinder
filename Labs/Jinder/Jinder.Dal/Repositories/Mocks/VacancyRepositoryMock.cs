@@ -14,8 +14,8 @@ namespace Jinder.Dal.Repositories.Mocks
         {
             _vacancies = vacancies;
             _newId = 0;
-            foreach (var vacancy in _vacancies) _newId = Math.Max(_newId, vacancy.Id); 
-            _newId++;
+            foreach (var vacancy in _vacancies) 
+                vacancy.Id = _newId++;
         }
 
         public VacancyRepositoryMock() : this(new List<Vacancy>())
@@ -42,6 +42,7 @@ namespace Jinder.Dal.Repositories.Mocks
 
         public Vacancy Create(Vacancy vacancy)
         {
+            vacancy.Id = _newId++;
             _vacancies.Add(vacancy);
             return vacancy;
         }
@@ -57,7 +58,5 @@ namespace Jinder.Dal.Repositories.Mocks
         {
             return _vacancies.Exists(s => s.UserId == userId);
         }
-
-        public Int32 NewId { get => _newId++; }
     }
 }

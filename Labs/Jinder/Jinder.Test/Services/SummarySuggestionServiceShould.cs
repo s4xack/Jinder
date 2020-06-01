@@ -28,12 +28,12 @@ namespace Jinder.Test.Services
         [SetUp]
         public void SummarySuggestionServiceSetUp()
         {
-            var user = new User(0, "", "", "", UserType.Recruiter);
-            var specializations = new List<Specialization>() {new Specialization(0, "Spec1"), new Specialization(1, "Spec2") };
-            var vacancy = new Vacancy(0, 0, specializations[0], new List<Skill>(), "");
+            var user = new User("", "", "", UserType.Recruiter);
+            var specializations = new List<Specialization>() {new Specialization("Spec1"), new Specialization("Spec2") };
+            var vacancy = new Vacancy(0, specializations[0], new List<Skill>(), "");
             var summaries = new List<Summary>();
             for (int i = 0; i < 10; i++)
-                summaries.Add(new Summary(i + 1, i, specializations[i % 2], new List<Skill>(), ""));
+                summaries.Add(new Summary(i + 1, specializations[i % 2], new List<Skill>(), ""));
 
             _userRepository = Mock.Of<IUserRepository>(
                 x => x.Get(0) == user);
@@ -43,7 +43,7 @@ namespace Jinder.Test.Services
                 x => x.GetAll() == summaries);
             _summarySuggestionRepository = new SummarySuggestionRepositoryMock(new List<SummarySuggestion>());
 
-            _summarySuggestionService = new SummarySuggestionService(_summarySuggestionRepository, _vacancyRepository, _userRepository, _summaryRepository, Mock.Of<MatchService>());
+            _summarySuggestionService = new SummarySuggestionService(_summarySuggestionRepository, _vacancyRepository, _userRepository, _summaryRepository, Mock.Of<IMatchService>());
 
             _rule = new SimpleSummaryRule(specializations[0], new List<Skill>());
         }

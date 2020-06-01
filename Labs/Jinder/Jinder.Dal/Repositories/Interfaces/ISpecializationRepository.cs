@@ -11,6 +11,5 @@ namespace Jinder.Dal.Repositories
         Specialization GetByName(String specializationName);
         Specialization Add(Specialization specialization);
         Specialization Delete(Int32 specializationId);
-        Int32 NewId { get; }
     }
 }

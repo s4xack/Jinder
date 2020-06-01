@@ -14,8 +14,8 @@ namespace Jinder.Dal.Repositories.Mocks
         {
             _skills = skills;
             _newId = 0;
-            foreach (var skill in _skills) _newId = Math.Max(_newId, skill.Id);
-            _newId++;
+            foreach (var skill in _skills) 
+                skill.Id = _newId++;
         }
 
         public SkillRepositoryMock() : this(new List<Skill>())
@@ -41,6 +41,7 @@ namespace Jinder.Dal.Repositories.Mocks
 
         public Skill Add(Skill skill)
         {
+            skill.Id = _newId++;
             _skills.Add(skill);
             return skill;
         }
@@ -52,7 +53,5 @@ namespace Jinder.Dal.Repositories.Mocks
             _skills.Remove(skill);
             return skill;
         }
-
-        public Int32 NewId { get => _newId++; }
     }
 }

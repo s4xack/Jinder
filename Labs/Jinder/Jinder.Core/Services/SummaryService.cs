@@ -56,7 +56,6 @@ namespace Jinder.Core.Services
 
             var summary = new Summary(
                 userId,
-                _summaryRepository.NewId,
                 _specializationRepository.GetByName(summaryData.Specialization),
                 summaryData.Skills
                     .Select(s => _skillRepository.GetByName(s))

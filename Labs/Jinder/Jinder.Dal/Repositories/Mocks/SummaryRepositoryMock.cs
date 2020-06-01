@@ -14,8 +14,8 @@ namespace Jinder.Dal.Repositories.Mocks
         {
             _summaries = summaries;
             _newId = 0;
-            foreach (var summary in _summaries) _newId = Math.Max(_newId, summary.Id);
-            _newId++;
+            foreach (var summary in _summaries)
+                summary.Id = _newId++;
         }
 
         public SummaryRepositoryMock() : this(new List<Summary>())
@@ -41,6 +41,7 @@ namespace Jinder.Dal.Repositories.Mocks
 
         public Summary Create(Summary summary)
         {
+            summary.Id = _newId++;
             _summaries.Add(summary);
             return summary;
         }
@@ -56,7 +57,5 @@ namespace Jinder.Dal.Repositories.Mocks
         {
             return _summaries.Exists(s => s.UserId == userId);
         }
-
-        public Int32 NewId { get => _newId++; }
     }
 }

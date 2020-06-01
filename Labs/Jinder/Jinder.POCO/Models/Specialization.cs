@@ -4,12 +4,11 @@ namespace Jinder.Poco.Models
 {
     public class Specialization
     {
-        public Int32 Id { get; }
+        public Int32 Id { get; set; }
         public String Name { get; }
 
-        public Specialization(Int32 id, String name)
+        public Specialization(String name)
         {
-            Id = id;
             Name = name;
         }
     }

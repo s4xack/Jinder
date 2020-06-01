@@ -25,12 +25,12 @@ namespace Jinder.Test.Services
         [SetUp]
         public void SummarySuggestionServiceSetUp()
         {
-            var user = new User(0, "", "", "", UserType.Candidate);
-            var specializations = new List<Specialization>() { new Specialization(0, "Spec1"), new Specialization(1, "Spec2") };
-            var summary = new Summary(0, 0, specializations[0], new List<Skill>(), "");
+            var user = new User("", "", "", UserType.Candidate);
+            var specializations = new List<Specialization>() { new Specialization("Spec1"), new Specialization("Spec2") };
+            var summary = new Summary(0, specializations[0], new List<Skill>(), "");
             var vacancies = new List<Vacancy>();
             for (int i = 0; i < 10; i++)
-                vacancies.Add(new Vacancy(i + 1, i, specializations[i % 2], new List<Skill>(), ""));
+                vacancies.Add(new Vacancy(i + 1, specializations[i % 2], new List<Skill>(), ""));
 
             _userRepository = Mock.Of<IUserRepository>(
                 x => x.Get(0) == user);

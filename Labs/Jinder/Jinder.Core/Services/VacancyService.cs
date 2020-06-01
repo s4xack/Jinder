@@ -55,7 +55,6 @@ namespace Jinder.Core.Services
 
             var vacancy = new Vacancy(
                 userId,
-                _vacancyRepository.NewId,
                 _specializationRepository.GetByName(vacancyData.Specialization),
                 vacancyData.Skills
                     .Select(s => _skillRepository.GetByName(s))

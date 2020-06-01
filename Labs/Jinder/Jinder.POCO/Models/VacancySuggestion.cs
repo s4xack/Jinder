@@ -7,14 +7,13 @@ namespace Jinder.Poco.Models
 {
     public class VacancySuggestion
     {
-        public Int32 Id { get; }
+        public Int32 Id { get; set; }
         public Int32 SummaryId { get; }
         public Vacancy Vacancy { get; }
         public SuggestionStatus Status { get; private set; }
 
-        public VacancySuggestion(Int32 id, Int32 summaryId, Vacancy vacancy)
+        public VacancySuggestion(Int32 summaryId, Vacancy vacancy)
         {
-            Id = id;
             SummaryId = summaryId;
             Vacancy = vacancy;
             Status = SuggestionStatus.Ready;

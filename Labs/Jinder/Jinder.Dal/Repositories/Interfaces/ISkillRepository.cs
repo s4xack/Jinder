@@ -11,6 +11,5 @@ namespace Jinder.Dal.Repositories
         Skill GetByName(String skillName);
         Skill Add(Skill skill);
         Skill Delete(Int32 skillId);
-        Int32 NewId { get; }
     }
 }

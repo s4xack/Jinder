@@ -15,7 +15,7 @@ namespace Jinder.Dal.Repositories.Mocks
             _summarySuggestions = summarySuggestions;
             _newId = 0;
             foreach (var summarySuggestion in _summarySuggestions)
-                _newId = Math.Max(_newId, summarySuggestion.Id);
+                summarySuggestion.Id = _newId++;
         }
 
         public SummarySuggestionRepositoryMock() : this(new List<SummarySuggestion>())
@@ -35,10 +35,12 @@ namespace Jinder.Dal.Repositories.Mocks
 
         public IReadOnlyCollection<SummarySuggestion> Add(IReadOnlyCollection<SummarySuggestion> summarySuggestions)
         {
+            foreach (var summarySuggestion in summarySuggestions)
+            {
+                summarySuggestion.Id = _newId++;
+            }
             _summarySuggestions.AddRange(summarySuggestions);
             return summarySuggestions.ToList();
         }
-
-        public Int32 NewId => _newId++;
     }
 }

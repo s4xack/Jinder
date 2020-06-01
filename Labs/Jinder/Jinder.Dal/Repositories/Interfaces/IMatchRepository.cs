@@ -10,6 +10,5 @@ namespace Jinder.Dal.Repositories
         IReadOnlyCollection<Match> GetAllForSummary(Int32 summaryId);
         IReadOnlyCollection<Match> GetAllForVacancy(Int32 vacancyId);
         Match Add(Match match);
-        Int32 NewId { get; } 
     }
 }
