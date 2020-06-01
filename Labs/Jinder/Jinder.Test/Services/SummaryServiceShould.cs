@@ -11,18 +11,6 @@ using Jinder.Poco.Types;
 
 namespace Jinder.Test.Services
 {
-    public static class SummaryDtoExtension
-    {
-        public static Boolean EquivalentTo(this SummaryDto summary, SummaryDto other)
-        {
-            return summary.Id == other.Id &&
-                   summary.UserId == other.UserId &&
-                   summary.Skills.SequenceEqual(other.Skills) &&
-                   summary.Specialization == other.Specialization &&
-                   summary.Information == other.Information;
-        }
-    }
-
     [TestFixture]
     public class SummaryServiceShould
     {
@@ -129,8 +117,8 @@ namespace Jinder.Test.Services
 
             // Assert
             Assert.That(result != null);
-            Assert.That(result.EquivalentTo(expected));
-            Assert.That(result.EquivalentTo(SummaryDto.Create(_summaryRepository.GetForUser(userId))));
+            Assert.That(result.Equals(expected));
+            Assert.That(result.Equals(SummaryDto.Create(_summaryRepository.GetForUser(userId))));
         }
 
         [Test]
@@ -144,7 +132,7 @@ namespace Jinder.Test.Services
             var result = _summaryService.Delete(summaryId);
 
             // Assert
-            Assert.That(result.EquivalentTo(expected));
+            Assert.That(result.Equals(expected));
             Assert.Throws<ArgumentException>(() => _summaryRepository.Get(summaryId));
         }
 
@@ -163,7 +151,7 @@ namespace Jinder.Test.Services
             // Assert
             Assert.That(result != null);
             Assert.That(result.Count == expected.Count);
-            for (var i = 0; i < result.Count; i++) Assert.That(result[i].EquivalentTo(expected[i]));
+            for (var i = 0; i < result.Count; i++) Assert.That(result[i].Equals(expected[i]));
         }
 
         [Test]
@@ -178,7 +166,7 @@ namespace Jinder.Test.Services
 
             // Assert
             Assert.That(result != null);
-            Assert.That(result.EquivalentTo(expected));
+            Assert.That(result.Equals(expected));
         }
 
         [Test]
@@ -193,7 +181,7 @@ namespace Jinder.Test.Services
 
             // Assert
             Assert.That(result != null);
-            Assert.That(result.EquivalentTo(expected));
+            Assert.That(result.Equals(expected));
         }
 
         [Test]

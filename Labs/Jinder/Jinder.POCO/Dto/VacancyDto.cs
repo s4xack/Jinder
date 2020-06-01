@@ -34,5 +34,14 @@ namespace Jinder.Poco.Dto
                 vacancy.Skills.Select(s => s.Name).ToList(),
                 vacancy.Information);
         }
+
+        public override Boolean Equals(Object obj)
+        {
+            return obj is VacancyDto other && (Id == other.Id &&
+                                               UserId == other.UserId &&
+                                               Skills.SequenceEqual(other.Skills) &&
+                                               Specialization == other.Specialization &&
+                                               Information == other.Information);
+        }
     }
 }
