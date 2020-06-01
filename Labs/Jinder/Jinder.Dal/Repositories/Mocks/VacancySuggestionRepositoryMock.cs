@@ -33,7 +33,7 @@ namespace Jinder.Dal.Repositories.Mocks
             return _vacancySuggestions.Where(s => s.SummaryId == summaryId).ToList();
         }
 
-        public IReadOnlyCollection<VacancySuggestion> Add(IEnumerable<VacancySuggestion> vacancySuggestions)
+        public IReadOnlyCollection<VacancySuggestion> Add(IReadOnlyCollection<VacancySuggestion> vacancySuggestions)
         {
             _vacancySuggestions.AddRange(vacancySuggestions);
             return vacancySuggestions.ToList();

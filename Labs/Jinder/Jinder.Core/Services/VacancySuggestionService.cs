@@ -33,6 +33,7 @@ namespace Jinder.Core.Services
             User user = _userRepository.Get(userId);
             if (user.Type != UserType.Candidate)
                 throw new ArgumentException($"User with id {userId} is not candidate!");
+
             Summary summary = _summaryRepository.GetForUser(userId);
             return summary.Id;
         }
@@ -40,9 +41,11 @@ namespace Jinder.Core.Services
         private IEnumerable<VacancySuggestion> GetAllForUser(Int32 userId)
         {
             Int32 summaryId = GetSummaryIdForUser(userId);
+
             IEnumerable<VacancySuggestion> suggestions = _vacancySuggestionRepository.GetAllForSummary(summaryId);
             if (!suggestions.Any())
                 suggestions = CompileForSummary(summaryId);
+
             return suggestions;
         }
 
@@ -54,8 +57,8 @@ namespace Jinder.Core.Services
             var rule = new SimpleVacancyRule(summary.Specialization, summary.Skills);
             IEnumerable<Vacancy> summaries = compiler.Compile(_vacancyRepository.GetAll(), rule);
 
-            IEnumerable<VacancySuggestion> vacancySuggestions =
-                summaries.Select(s => new VacancySuggestion(_vacancySuggestionRepository.NewId, summaryId, s));
+            IReadOnlyCollection<VacancySuggestion> vacancySuggestions =
+                summaries.Select(s => new VacancySuggestion(_vacancySuggestionRepository.NewId, summaryId, s)).ToList();
             vacancySuggestions = _vacancySuggestionRepository.Add(vacancySuggestions).ToList();
 
             if (!vacancySuggestions.Any())
@@ -100,10 +103,12 @@ namespace Jinder.Core.Services
         public void AcceptSuggestionForUser(Int32 userId, Int32 suggestionId)
         {
             Int32 summaryId = GetSummaryIdForUser(userId);
+
             VacancySuggestion suggestion = _vacancySuggestionRepository.Get(suggestionId);
             if (suggestion.SummaryId != summaryId)
                 throw new ArgumentException(
                     $"User with id {userId} don't have access for suggestion with id {suggestion.Id}!");
+
             suggestion.Accept();
             _matchService.UpdateMatch(summaryId, suggestion.Vacancy.Id);
         }
@@ -111,20 +116,24 @@ namespace Jinder.Core.Services
         public void RejectSuggestionForUser(Int32 userId, Int32 suggestionId)
         {
             Int32 summaryId = GetSummaryIdForUser(userId);
+
             VacancySuggestion suggestion = _vacancySuggestionRepository.Get(suggestionId);
             if (suggestion.SummaryId != summaryId)
                 throw new ArgumentException(
                     $"User with id {userId} don't have access for suggestion with id {suggestion.Id}!");
+
             suggestion.Reject();
         }
 
         public void SkipSuggestionForUser(Int32 userId, Int32 suggestionId)
         {
             Int32 summaryId = GetSummaryIdForUser(userId);
+
             VacancySuggestion suggestion = _vacancySuggestionRepository.Get(suggestionId);
             if (suggestion.SummaryId != summaryId)
                 throw new ArgumentException(
                     $"User with id {userId} don't have access for suggestion with id {suggestion.Id}!");
+
             suggestion.Skip();
         }
     }

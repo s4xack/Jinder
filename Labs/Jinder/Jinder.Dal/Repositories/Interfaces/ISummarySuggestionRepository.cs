@@ -9,7 +9,7 @@ namespace Jinder.Dal.Repositories
     {
         SummarySuggestion Get(Int32 suggestionId);
         IReadOnlyCollection<SummarySuggestion> GetAllForVacancy(Int32 vacancyId);
-        IReadOnlyCollection<SummarySuggestion> Add(IEnumerable<SummarySuggestion> summarySuggestions);
+        IReadOnlyCollection<SummarySuggestion> Add(IReadOnlyCollection<SummarySuggestion> summarySuggestions);
         Int32 NewId { get; }
     }
 }
