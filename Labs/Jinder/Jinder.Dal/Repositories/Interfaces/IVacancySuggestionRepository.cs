@@ -8,8 +8,8 @@ namespace Jinder.Dal.Repositories
     public interface IVacancySuggestionRepository
     {
         VacancySuggestion Get(Int32 suggestionId);
-        IEnumerable<VacancySuggestion> GetAllForSummary(Int32 summaryId);
-        IEnumerable<VacancySuggestion> Add(IEnumerable<VacancySuggestion> summarySuggestions);
+        IReadOnlyCollection<VacancySuggestion> GetAllForSummary(Int32 summaryId);
+        IReadOnlyCollection<VacancySuggestion> Add(IEnumerable<VacancySuggestion> summarySuggestions);
         Int32 NewId { get; }
     }
 }

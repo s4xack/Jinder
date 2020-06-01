@@ -22,7 +22,7 @@ namespace Jinder.Dal.Repositories.Mocks
         {
         }
 
-        public IEnumerable<Summary> GetAll()
+        public IReadOnlyCollection<Summary> GetAll()
         {
             return _summaries;
         }

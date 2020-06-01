@@ -44,7 +44,8 @@ namespace Jinder.Core.Services
         public List<SummaryDto> GetAllForRecruiter(Int32 userId)
         {
             Int32 vacancyId = GetVacancyIdForUser(userId);
-            IEnumerable<Match> matches = _matchRepository.GetAllForVacancy(vacancyId).Where(m => m.Status == MatchStatus.Full);
+            IEnumerable<Match> matches = _matchRepository.GetAllForVacancy(vacancyId)
+                .Where(m => m.Status == MatchStatus.Full).ToList();
             if (!matches.Any())
                 throw new ArgumentException($"No matches for user with id{userId}!");
             return matches.Select(m => _summaryRepository.Get(m.SummaryId))
@@ -55,7 +56,8 @@ namespace Jinder.Core.Services
         public List<VacancyDto> GetAllForCandidate(Int32 userId)
         {
             Int32 summaryId = GetSummaryIdForUser(userId);
-            IEnumerable<Match> matches = _matchRepository.GetAllForVacancy(summaryId).Where(m => m.Status == MatchStatus.Full);
+            IEnumerable<Match> matches = _matchRepository.GetAllForVacancy(summaryId)
+                .Where(m => m.Status == MatchStatus.Full).ToList();
             if (!matches.Any())
                 throw new ArgumentException($"No matches for user with id{userId}!");
             return matches.Select(m => _vacancyRepository.Get(m.VacancyId))

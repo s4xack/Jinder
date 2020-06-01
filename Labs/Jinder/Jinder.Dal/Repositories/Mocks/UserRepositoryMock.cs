@@ -19,7 +19,7 @@ namespace Jinder.Dal.Repositories.Mocks
         {
         }
 
-        public IEnumerable<User> GetAll()
+        public IReadOnlyCollection<User> GetAll()
         {
             return _users;
         }

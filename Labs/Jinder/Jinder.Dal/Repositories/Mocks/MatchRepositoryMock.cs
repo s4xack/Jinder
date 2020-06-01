@@ -28,14 +28,14 @@ namespace Jinder.Dal.Repositories.Mocks
                    throw new ArgumentException($"No natch with id {matchId}!");
         }
 
-        public IEnumerable<Match> GetAllForSummary(Int32 summaryId)
+        public IReadOnlyCollection<Match> GetAllForSummary(Int32 summaryId)
         {
-            return _matches.Where(m => m.SummaryId == summaryId);
+            return _matches.Where(m => m.SummaryId == summaryId).ToList();
         }
 
-        public IEnumerable<Match> GetAllForVacancy(Int32 vacancyId)
+        public IReadOnlyCollection<Match> GetAllForVacancy(Int32 vacancyId)
         {
-            return _matches.Where(m => m.VacancyId == vacancyId);
+            return _matches.Where(m => m.VacancyId == vacancyId).ToList();
         }
 
         public Match Add(Match match)

@@ -28,15 +28,15 @@ namespace Jinder.Dal.Repositories.Mocks
                    throw new ArgumentException($"No summary suggestion with id {suggestionId}!");
         }
 
-        public IEnumerable<SummarySuggestion> GetAllForVacancy(Int32 vacancyId)
+        public IReadOnlyCollection<SummarySuggestion> GetAllForVacancy(Int32 vacancyId)
         {
-            return _summarySuggestions.Where(s => s.VacancyId == vacancyId);
+            return _summarySuggestions.Where(s => s.VacancyId == vacancyId).ToList();
         }
 
-        public IEnumerable<SummarySuggestion> Add(IEnumerable<SummarySuggestion> summarySuggestions)
+        public IReadOnlyCollection<SummarySuggestion> Add(IEnumerable<SummarySuggestion> summarySuggestions)
         {
             _summarySuggestions.AddRange(summarySuggestions);
-            return summarySuggestions;
+            return summarySuggestions.ToList();
         }
 
         public Int32 NewId => _newId++;

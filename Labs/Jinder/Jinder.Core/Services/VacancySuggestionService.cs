@@ -56,7 +56,7 @@ namespace Jinder.Core.Services
 
             IEnumerable<VacancySuggestion> vacancySuggestions =
                 summaries.Select(s => new VacancySuggestion(_vacancySuggestionRepository.NewId, summaryId, s));
-            vacancySuggestions = _vacancySuggestionRepository.Add(vacancySuggestions);
+            vacancySuggestions = _vacancySuggestionRepository.Add(vacancySuggestions).ToList();
 
             if (!vacancySuggestions.Any())
                 throw new ArgumentException("It's no suggestion for summary! Change summary or try later.");
@@ -67,7 +67,7 @@ namespace Jinder.Core.Services
         private IEnumerable<VacancySuggestion> ResetSkippedUser(Int32 userId)
         {
             IEnumerable<VacancySuggestion> vacancySuggestions =
-                GetAllForUser(userId).Where(s => s.Status == SuggestionStatus.Skipped);
+                GetAllForUser(userId).Where(s => s.Status == SuggestionStatus.Skipped).ToList();
             foreach (var vacancySuggestion in vacancySuggestions)
                 vacancySuggestion.Reset();
             return vacancySuggestions;
@@ -75,7 +75,7 @@ namespace Jinder.Core.Services
         private IEnumerable<VacancySuggestion> GetAllReadyForUser(Int32 userId)
         {
             IEnumerable<VacancySuggestion> vacancySuggestions = GetAllForUser(userId)
-                .Where(s => s.Status == SuggestionStatus.Ready);
+                .Where(s => s.Status == SuggestionStatus.Ready).ToList();
             if (!vacancySuggestions.Any())
                 ResetSkippedUser(userId);
             if (!vacancySuggestions.Any())

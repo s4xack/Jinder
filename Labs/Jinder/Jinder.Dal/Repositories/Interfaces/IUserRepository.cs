@@ -6,7 +6,7 @@ namespace Jinder.Dal.Repositories
 {
     public interface IUserRepository
     {
-        IEnumerable<User> GetAll();
+        IReadOnlyCollection<User> GetAll();
         User Get(Int32 userId);
     }
 }
