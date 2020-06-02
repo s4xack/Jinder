@@ -71,7 +71,10 @@ namespace Jinder.Core.Services
             IEnumerable<SummarySuggestion> summarySuggestions =
                 GetAllForUser(userId).Where(s => s.Status == SuggestionStatus.Skipped).ToList();
             foreach (var summarySuggestion in summarySuggestions)
+            {
                 summarySuggestion.Reset();
+                _summarySuggestionRepository.Update(summarySuggestion);
+            }
             return summarySuggestions;
         }
         private IEnumerable<SummarySuggestion> GetAllReadyForUser(Int32 userId)
@@ -112,6 +115,7 @@ namespace Jinder.Core.Services
                     $"User with id {userId} don't have access for suggestion with id {suggestion.Id}!");
 
             suggestion.Accept();
+            _summarySuggestionRepository.Update(suggestion);
             _matchService.UpdateMatch(suggestion.Summary.Id, vacancyId);
         }
 
@@ -125,6 +129,7 @@ namespace Jinder.Core.Services
                     $"User with id {userId} don't have access for suggestion with id {suggestion.Id}!");
 
             suggestion.Reject();
+            _summarySuggestionRepository.Update(suggestion);
         }
 
         public void SkipSuggestionForUser(Int32 userId, Int32 suggestionId)
@@ -137,6 +142,7 @@ namespace Jinder.Core.Services
                     $"User with id {userId} don't have access for suggestion with id {suggestion.Id}!");
 
             suggestion.Skip();
+            _summarySuggestionRepository.Update(suggestion);
         }
     }
 }

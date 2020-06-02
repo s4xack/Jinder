@@ -19,6 +19,11 @@ namespace Jinder.Poco.Models
             Status = SuggestionStatus.Ready;
         }
 
+        public VacancySuggestion Copy()
+        {
+            return new VacancySuggestion(SummaryId, Vacancy) {Id = Id, Status = Status};
+        }
+
         public void Accept()
         {
             Status = SuggestionStatus.Accepted;

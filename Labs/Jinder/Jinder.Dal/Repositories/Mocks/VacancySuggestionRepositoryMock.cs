@@ -12,7 +12,7 @@ namespace Jinder.Dal.Repositories.Mocks
 
         public VacancySuggestionRepositoryMock(List<VacancySuggestion> vacancySuggestions)
         {
-            _vacancySuggestions = vacancySuggestions;
+            _vacancySuggestions = vacancySuggestions.Select(s => s.Copy()).ToList();
             _newId = 0;
             foreach (var vacancySuggestion in _vacancySuggestions) 
                 vacancySuggestion.Id = _newId++;
@@ -39,8 +39,16 @@ namespace Jinder.Dal.Repositories.Mocks
             {
                 vacancySuggestion.Id = _newId++;
             }
-            _vacancySuggestions.AddRange(vacancySuggestions);
+            _vacancySuggestions.AddRange(vacancySuggestions.Select(s => s.Copy()));
             return vacancySuggestions.ToList();
+        }
+
+        public VacancySuggestion Update(VacancySuggestion vacancySuggestion)
+        {
+            VacancySuggestion oldSuggestion = _vacancySuggestions.Find(s => s.Id == vacancySuggestion.Id);
+            _vacancySuggestions.Remove(oldSuggestion);
+            _vacancySuggestions.Add(vacancySuggestion.Copy());
+            return vacancySuggestion;
         }
     }
 }
