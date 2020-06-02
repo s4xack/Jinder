@@ -38,17 +38,6 @@ namespace Jinder.Core.Services
             return summary.Id;
         }
 
-        private IEnumerable<VacancySuggestion> GetAllForUser(Int32 userId)
-        {
-            Int32 summaryId = GetSummaryIdForUser(userId);
-
-            IEnumerable<VacancySuggestion> suggestions = _vacancySuggestionRepository.GetAllForSummary(summaryId);
-            if (!suggestions.Any())
-                suggestions = CompileForSummary(summaryId);
-
-            return suggestions;
-        }
-
         private IEnumerable<VacancySuggestion> CompileForSummary(Int32 summaryId)
         {
             Summary summary = _summaryRepository.Get(summaryId);
@@ -69,8 +58,8 @@ namespace Jinder.Core.Services
 
         private IEnumerable<VacancySuggestion> ResetSkippedUser(Int32 userId)
         {
-            IEnumerable<VacancySuggestion> vacancySuggestions =
-                GetAllForUser(userId).Where(s => s.Status == SuggestionStatus.Skipped).ToList();
+            Int32 summaryId = GetSummaryIdForUser(userId);
+            IEnumerable<VacancySuggestion> vacancySuggestions = _vacancySuggestionRepository.GetForSummaryByState(summaryId, SuggestionStatus.Skipped).ToList();
             foreach (var vacancySuggestion in vacancySuggestions)
             {
                 vacancySuggestion.Reset();
@@ -80,13 +69,20 @@ namespace Jinder.Core.Services
         }
         private IEnumerable<VacancySuggestion> GetAllReadyForUser(Int32 userId)
         {
-            IEnumerable<VacancySuggestion> vacancySuggestions = GetAllForUser(userId)
-                .Where(s => s.Status == SuggestionStatus.Ready).ToList();
+            Int32 summaryId = GetSummaryIdForUser(userId);
+            IEnumerable<VacancySuggestion> vacancySuggestions = _vacancySuggestionRepository
+                .GetForSummaryByState(summaryId, SuggestionStatus.Ready);
+            
             if (!vacancySuggestions.Any())
-                ResetSkippedUser(userId);
-
-            vacancySuggestions = GetAllForUser(userId)
-                .Where(s => s.Status == SuggestionStatus.Ready).ToList();
+            {
+                if (!_vacancySuggestionRepository.GetAllForSummary(summaryId).Any())
+                    CompileForSummary(summaryId);
+                else
+                    ResetSkippedUser(userId);
+                vacancySuggestions = _vacancySuggestionRepository
+                    .GetForSummaryByState(summaryId, SuggestionStatus.Ready);
+            }
+            
             if (!vacancySuggestions.Any())
                 throw new ArgumentException("It's no suggestion for summary! Change summary or try later.");
             return vacancySuggestions;

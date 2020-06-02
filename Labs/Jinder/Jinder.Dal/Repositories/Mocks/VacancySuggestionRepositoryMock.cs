@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Jinder.Poco.Models;
+using Jinder.Poco.Types;
 
 namespace Jinder.Dal.Repositories.Mocks
 {
@@ -31,6 +32,15 @@ namespace Jinder.Dal.Repositories.Mocks
         public IReadOnlyCollection<VacancySuggestion> GetAllForSummary(Int32 summaryId)
         {
             return _vacancySuggestions.Where(s => s.SummaryId == summaryId).ToList();
+        }
+
+        public IReadOnlyCollection<VacancySuggestion> GetForSummaryByState(Int32 summaryId, SuggestionStatus state)
+        {
+            return _vacancySuggestions
+                .Where(s => s.SummaryId == summaryId)
+                .Where(s => s.Status == state)
+                .Select(s => s.Copy())
+                .ToList();
         }
 
         public IReadOnlyCollection<VacancySuggestion> Add(IReadOnlyCollection<VacancySuggestion> vacancySuggestions)
