@@ -10,6 +10,7 @@ namespace Joiner
         {
             return elements
                 .Select(e => e.Name)
+                .DefaultIfEmpty(String.Empty)
                 .Aggregate((a, b) => a + delimiter + b);
         }
     }

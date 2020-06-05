@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joiner", "Joiner\Joiner.csproj", "{2202F2E3-00FA-4251-9B1C-027F365E5811}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Joiner", "Joiner\Joiner.csproj", "{2202F2E3-00FA-4251-9B1C-027F365E5811}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqTasks.Tests", "LinqTasks.Tests\LinqTasks.Tests.csproj", "{9605640D-DE6F-4B23-8D23-707D1F6774E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{2202F2E3-00FA-4251-9B1C-027F365E5811}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2202F2E3-00FA-4251-9B1C-027F365E5811}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2202F2E3-00FA-4251-9B1C-027F365E5811}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9605640D-DE6F-4B23-8D23-707D1F6774E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9605640D-DE6F-4B23-8D23-707D1F6774E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9605640D-DE6F-4B23-8D23-707D1F6774E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9605640D-DE6F-4B23-8D23-707D1F6774E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -23,12 +29,15 @@ Global
 		SolutionGuid = {6E838DF6-4572-4B83-83B6-5A0FD582563C}
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
+		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://dev.azure.com/veeamacademy
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = Joiner\\Joiner.csproj
 		SccProjectName1 = Joiner
 		SccLocalPath1 = Joiner
+		SccProjectUniqueName2 = LinqTasks.Tests\\LinqTasks.Tests.csproj
+		SccProjectName2 = LinqTasks.Tests
+		SccLocalPath2 = LinqTasks.Tests
 	EndGlobalSection
 EndGlobal
