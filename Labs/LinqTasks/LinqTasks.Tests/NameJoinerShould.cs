@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace LinqTasks.Tests
 {
-    public class Tests
+    public class NameJoinerShould
     {
         private class NamedInt : INamed
         {
