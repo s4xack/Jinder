@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Filter\Filter.csproj" />
+    <ProjectReference Include="..\Grouper\Grouper.csproj" />
     <ProjectReference Include="..\Joiner\Joiner.csproj" />
   </ItemGroup>
 
