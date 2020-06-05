@@ -9,9 +9,10 @@ namespace Grouper
         public static IEnumerable<IGrouping<Int32, String>> GroupWordsByLength(String sentence)
         {
             return sentence
-                .Split(new String[] {" ", ", ", ": ", ". ", " - ", "; ", "... "}, StringSplitOptions.None)
+                .Split(new String[] {" - ", " ", ", ", ": ", ". ", "; ", "... "}, StringSplitOptions.None)
                 .GroupBy(w => w.Length)
-                .OrderBy(g => g.Count());
+                .OrderByDescending(g => g.Count())
+                .ThenByDescending(g => g.Key);
         }
     }
 }
