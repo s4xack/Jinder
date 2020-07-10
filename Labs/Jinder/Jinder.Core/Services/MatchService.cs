@@ -52,7 +52,7 @@ namespace Jinder.Core.Services
             if (!matches.Any())
                 throw new ArgumentException($"No matches for user with id{userId}!");
 
-            return matches.Select(m => _summaryRepository.Get(m.SummaryId))
+            return matches.Select(m => m.Summary)
                 .Select(SummaryDto.Create)
                 .ToList();
         }
@@ -66,16 +66,20 @@ namespace Jinder.Core.Services
             if (!matches.Any())
                 throw new ArgumentException($"No matches for user with id{userId}!");
 
-            return matches.Select(m => _vacancyRepository.Get(m.VacancyId))
+            return matches.Select(m => m.Vacancy)
                 .Select(VacancyDto.Create)
                 .ToList();
         }
 
         public void UpdateMatch(Int32 summaryId, Int32 vacancyId)
         {
-            Match match = _matchRepository.GetAllForSummary(summaryId).FirstOrDefault(m => m.VacancyId == vacancyId);
+            Match match = _matchRepository.GetAllForSummary(summaryId).FirstOrDefault(m => m.Vacancy.Id == vacancyId);
             if (match is null)
-                _matchRepository.Add(new Match(summaryId, vacancyId));
+            {
+                var summary = _summaryRepository.Get(summaryId);
+                var vacancy = _vacancyRepository.Get(vacancyId);
+                _matchRepository.Add(new Match(summary, vacancy));
+            }
             else
                 match.Update();
         }

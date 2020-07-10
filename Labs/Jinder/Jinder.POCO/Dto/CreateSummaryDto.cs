@@ -6,9 +6,9 @@ namespace Jinder.Poco.Dto
 {
     public class CreateSummaryDto
     {
-        public String Specialization { get; }
-        public List<String> Skills { get; }
-        public String Information { get; }
+        public String Specialization { get; set; }
+        public List<String> Skills { get; set; }
+        public String Information { get; set; }
 
         [JsonConstructor]
         public CreateSummaryDto(String specialization, List<String> skills, String information)

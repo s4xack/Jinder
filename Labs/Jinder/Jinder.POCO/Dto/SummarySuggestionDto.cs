@@ -9,9 +9,9 @@ namespace Jinder.Poco.Dto
 {
     public class SummarySuggestionDto
     {
-        public Int32 Id { get; }
-        public SummaryDto Summary { get; }
-        public SuggestionStatus Status { get; }
+        public Int32 Id { get; set; }
+        public SummaryDto Summary { get; set; }
+        public SuggestionStatus Status { get; set; }
 
         [JsonConstructor]
         public SummarySuggestionDto(Int32 id, SummaryDto summary, SuggestionStatus status)

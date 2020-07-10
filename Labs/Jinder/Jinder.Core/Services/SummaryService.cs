@@ -55,7 +55,7 @@ namespace Jinder.Core.Services
                 throw new ArgumentException($"Summary for user with id {userId} have already created!");
 
             var summary = new Summary(
-                userId,
+                user,
                 _specializationRepository.GetByName(summaryData.Specialization),
                 summaryData.Skills
                     .Select(s => _skillRepository.GetByName(s))

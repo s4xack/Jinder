@@ -30,12 +30,12 @@ namespace Jinder.Dal.Repositories.Mocks
 
         public IReadOnlyCollection<Match> GetAllForSummary(Int32 summaryId)
         {
-            return _matches.Where(m => m.SummaryId == summaryId).ToList();
+            return _matches.Where(m => m.Summary.Id == summaryId).ToList();
         }
 
         public IReadOnlyCollection<Match> GetAllForVacancy(Int32 vacancyId)
         {
-            return _matches.Where(m => m.VacancyId == vacancyId).ToList();
+            return _matches.Where(m => m.Vacancy.Id == vacancyId).ToList();
         }
 
         public Match Add(Match match)

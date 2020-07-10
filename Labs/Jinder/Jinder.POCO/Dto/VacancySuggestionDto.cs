@@ -7,9 +7,9 @@ namespace Jinder.Poco.Dto
 {
     public class VacancySuggestionDto
     {
-        public Int32 Id { get; }
-        public VacancyDto Vacancy { get; }
-        public SuggestionStatus Status { get; }
+        public Int32 Id { get; set; }
+        public VacancyDto Vacancy { get; set; }
+        public SuggestionStatus Status { get; set; }
 
         [JsonConstructor]
         public VacancySuggestionDto(Int32 id, VacancyDto vacancy, SuggestionStatus status)

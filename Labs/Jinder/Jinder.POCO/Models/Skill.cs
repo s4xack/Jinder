@@ -1,11 +1,16 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Jinder.Poco.Models
 {
     public class Skill
     {
-        public Int32 Id { get; set; }
-        public String Name { get; }
+        [Key]
+        public String Name { get; private set; }
+
+        public Skill()
+        {
+        }
 
         public Skill(String name)
         {

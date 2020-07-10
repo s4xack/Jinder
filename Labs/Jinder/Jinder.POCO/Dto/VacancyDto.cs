@@ -9,11 +9,11 @@ namespace Jinder.Poco.Dto
 {
     public class VacancyDto
     {
-        public Int32 UserId { get; }
-        public Int32 Id { get; }
-        public String Specialization { get; }
-        public List<String> Skills { get; }
-        public String Information { get; }
+        public Int32 UserId { get; set; }
+        public Int32 Id { get; set; }
+        public String Specialization { get; set; }
+        public List<String> Skills { get; set; }
+        public String Information { get; set; }
 
         [JsonConstructor]
         public VacancyDto(Int32 userId, Int32 id, String specialization, List<String> skills, String information)
@@ -28,10 +28,10 @@ namespace Jinder.Poco.Dto
         public static VacancyDto Create(Vacancy vacancy)
         {
             return new VacancyDto(
-                vacancy.UserId,
+                vacancy.User.Id,
                 vacancy.Id,
                 vacancy.Specialization.Name,
-                vacancy.Skills.Select(s => s.Name).ToList(),
+                vacancy.Skills.Select(s => s.Skill.Name).ToList(),
                 vacancy.Information);
         }
 

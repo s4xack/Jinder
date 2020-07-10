@@ -1,21 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Jinder.Poco.Models
 {
     public class Summary
     {
-        public Int32 UserId { get; }
+        public User User { get; private set; }
         public Int32 Id { get; set; }
-        public Specialization Specialization { get; }
-        public List<Skill> Skills { get; }
-        public String Information { get; }
+        public Specialization Specialization { get; private set; }
+        public List<SummarySkill> Skills { get; private set; }
+        public String Information { get; private set; }
 
-        public Summary(Int32 userId, Specialization specialization, List<Skill> skills, String information)
+        public Summary()
         {
-            UserId = userId;
+        }
+
+        public Summary(User user, Specialization specialization, List<Skill> skills, String information)
+        {
+            User = user;
             Specialization = specialization;
-            Skills = skills;
+            Skills = skills.Select(s => new SummarySkill(s, this)).ToList();
             Information = information;
         }
     }

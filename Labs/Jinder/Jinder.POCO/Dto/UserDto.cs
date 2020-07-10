@@ -7,10 +7,10 @@ namespace Jinder.Poco.Dto
 {
     public class UserDto
     {
-        public Int32 Id { get; }
-        public String Name { get; }
-        public String Email { get; }
-        public UserType Type { get; }
+        public Int32 Id { get; set; }
+        public String Name { get; set; }
+        public String Email { get; set; }
+        public UserType Type { get; set; }
 
         [JsonConstructor]
         public UserDto(Int32 id, String name, String email, UserType type)

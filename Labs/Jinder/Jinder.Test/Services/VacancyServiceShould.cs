@@ -70,12 +70,12 @@ namespace Jinder.Test.Services
             var vacancies = new List<Vacancy>
             {
                 new Vacancy(
-                    2,
+                    users[2],
                     new Specialization("Spec1"),
                     new List<Skill> {new Skill("Skill1"), new Skill("Skill2")},
                     "Info"),
                 new Vacancy(
-                    5,
+                    users[5],
                     new Specialization( "Spec2"),
                     new List<Skill> {new Skill("Skill3"), new Skill("Skill4")},
                     "Info")

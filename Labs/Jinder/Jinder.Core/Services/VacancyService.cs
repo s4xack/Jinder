@@ -54,7 +54,7 @@ namespace Jinder.Core.Services
                 throw new ArgumentException($"Vacancy for user with id {userId} have already created!");
 
             var vacancy = new Vacancy(
-                userId,
+                user,
                 _specializationRepository.GetByName(vacancyData.Specialization),
                 vacancyData.Skills
                     .Select(s => _skillRepository.GetByName(s))

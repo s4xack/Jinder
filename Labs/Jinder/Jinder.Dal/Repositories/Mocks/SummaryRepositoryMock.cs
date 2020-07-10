@@ -35,7 +35,7 @@ namespace Jinder.Dal.Repositories.Mocks
 
         public Summary GetForUser(Int32 userId)
         {
-            return _summaries.FirstOrDefault(s => s.UserId == userId) ??
+            return _summaries.FirstOrDefault(s => s.User.Id == userId) ??
                    throw new ArgumentException($"No summary for user with id {userId}!");
         }
 
@@ -55,7 +55,7 @@ namespace Jinder.Dal.Repositories.Mocks
 
         public Boolean IsHaveForUser(Int32 userId)
         {
-            return _summaries.Exists(s => s.UserId == userId);
+            return _summaries.Exists(s => s.User.Id == userId);
         }
     }
 }

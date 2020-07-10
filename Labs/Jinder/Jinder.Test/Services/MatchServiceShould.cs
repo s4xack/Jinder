@@ -18,15 +18,17 @@ namespace Jinder.Test.Services
         [SetUp]
         public void MatchServiceSetUp()
         {
-            var user = new User("", "", "", UserType.Candidate);
+            var candidate = new User("", "", "", UserType.Candidate);
+            var recruiter = new User("", "", "", UserType.Recruiter);
             var specialization = new Specialization("spec");
-            var summary = new Summary(0, specialization, new List<Skill>(), "");
-            var vacancy = new Vacancy(1, specialization, new List<Skill>(), "");
+            var summary = new Summary(candidate, specialization, new List<Skill>(), "");
+            var vacancy = new Vacancy(recruiter, specialization, new List<Skill>(), "");
             var matchRepository = new MatchRepositoryMock(new List<Match>());
             var userRepository = Mock.Of<IUserRepository>(x => 
-                x.Get(0) == user);
+                x.Get(0) == candidate);
             var summaryRepository = Mock.Of<ISummaryRepository>(x =>
-                x.GetForUser(0) == summary);
+                x.GetForUser(0) == summary &&
+                x.Get(0) == summary);
             var vacancyRepository = Mock.Of<IVacancyRepository>(x =>
                 x.Get(0) == vacancy);
             _matchService = new MatchService(matchRepository, userRepository, summaryRepository, vacancyRepository);

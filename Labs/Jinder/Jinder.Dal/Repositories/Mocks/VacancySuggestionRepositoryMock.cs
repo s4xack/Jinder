@@ -31,13 +31,13 @@ namespace Jinder.Dal.Repositories.Mocks
 
         public IReadOnlyCollection<VacancySuggestion> GetAllForSummary(Int32 summaryId)
         {
-            return _vacancySuggestions.Where(s => s.SummaryId == summaryId).ToList();
+            return _vacancySuggestions.Where(s => s.Summary.Id == summaryId).ToList();
         }
 
         public IReadOnlyCollection<VacancySuggestion> GetForSummaryByState(Int32 summaryId, SuggestionStatus state)
         {
             return _vacancySuggestions
-                .Where(s => s.SummaryId == summaryId)
+                .Where(s => s.Summary.Id == summaryId)
                 .Where(s => s.Status == state)
                 .Select(s => s.Copy())
                 .ToList();

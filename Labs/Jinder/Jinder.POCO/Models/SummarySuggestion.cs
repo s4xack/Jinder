@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using Jinder.Poco.Types;
 
@@ -8,20 +9,35 @@ namespace Jinder.Poco.Models
     public class SummarySuggestion
     {
         public Int32 Id { get; set; }
-        public Int32 VacancyId { get; }
-        public Summary Summary { get; }
+
+        [ForeignKey("Vacancy")]
+        public Int32 VacancyId { get; private set; }
+        public Summary Summary { get; private set; }
+
+        [ForeignKey("Summary")]
+        public Int32 SummaryId { get; private set; }
+        public Vacancy Vacancy { get; private set; }
+        
         public SuggestionStatus Status { get; private set; }
 
-        public SummarySuggestion(Int32 vacancyId, Summary summary)
+        public SummarySuggestion()
         {
-            VacancyId = vacancyId;
+        }
+
+        public SummarySuggestion(Vacancy vacancy, Summary summary)
+        {
+            Vacancy = vacancy;
+            VacancyId = vacancy.Id;
+
             Summary = summary;
+            SummaryId = summary.Id;
+
             Status = SuggestionStatus.Ready;
         }
 
         public SummarySuggestion Copy()
         {
-            return new SummarySuggestion(VacancyId, Summary) {Id = Id, Status = Status};
+            return new SummarySuggestion(Vacancy, Summary) {Id = Id, Status = Status};
         }
 
         public void Accept()
