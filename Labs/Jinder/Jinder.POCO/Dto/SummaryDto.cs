@@ -30,7 +30,7 @@ namespace Jinder.Poco.Dto
                 summary.User.Id,
                 summary.Id,
                 summary.Specialization.Name,
-                summary.Skills.Select(s => s.Skill.Name).ToList(),
+                summary.Skills.Select(s => s.Name).ToList(),
                 summary.Information);
         }
 

@@ -1,16 +1,11 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace Jinder.Poco.Models
 {
     public class Specialization
     {
-        [Key]
-        public String Name { get; private set; }
-
-        public Specialization()
-        {
-        }
+        public Int32 Id { get; set; }
+        public String Name { get; }
 
         public Specialization(String name)
         {

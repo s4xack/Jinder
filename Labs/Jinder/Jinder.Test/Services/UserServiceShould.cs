@@ -33,37 +33,30 @@ namespace Jinder.Test.Services
                 new User(
                     "0@email.com",
                     "Admin",
-                    string.Empty,
                     UserType.Administrator),
                 new User(
                     "1@email.com",
                     "Ivan",
-                    string.Empty,
                     UserType.Candidate),
                 new User(
                     "2@email.com",
                     "Shepherd",
-                    string.Empty,
                     UserType.Recruiter),
                 new User(
                     "3@email.com",
                     "Alex",
-                    string.Empty,
                     UserType.Candidate),
                 new User(
                     "4@email.com",
                     "Max",
-                    string.Empty,
                     UserType.Candidate),
                 new User(
                     "5@email.com",
                     "Roman",
-                    string.Empty,
                     UserType.Recruiter),
                 new User(
                     "6@email.com",
-                    "Nick",
-                    string.Empty,
+                    "Nick", 
                     UserType.Recruiter)
             };
 

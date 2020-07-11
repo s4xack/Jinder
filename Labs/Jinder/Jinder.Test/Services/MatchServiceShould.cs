@@ -18,8 +18,8 @@ namespace Jinder.Test.Services
         [SetUp]
         public void MatchServiceSetUp()
         {
-            var candidate = new User("", "", "", UserType.Candidate);
-            var recruiter = new User("", "", "", UserType.Recruiter);
+            var candidate = new User("", "", UserType.Candidate);
+            var recruiter = new User("", "", UserType.Recruiter);
             var specialization = new Specialization("spec");
             var summary = new Summary(candidate, specialization, new List<Skill>(), "");
             var vacancy = new Vacancy(recruiter, specialization, new List<Skill>(), "");

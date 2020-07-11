@@ -21,8 +21,8 @@ namespace Jinder.Core.Tools.Compilers.Rules
         {
             return vacancy.Specialization.Name == _specialization.Name &&
                    vacancy.Skills
-                       .Select(s => s.SkillName)
-                       .Where(_skills.Select(s => s.Name).Contains)
+                       .Select(s => s.Id)
+                       .Where(_skills.Select(s => s.Id).Contains)
                        .Count() * 2 >= _skills.Count;
         }
     }

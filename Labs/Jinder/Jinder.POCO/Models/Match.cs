@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
 using Jinder.Poco.Types;
 
 namespace Jinder.Poco.Models
@@ -8,29 +7,16 @@ namespace Jinder.Poco.Models
     {
         public Int32 Id { get; set; }
 
-        [ForeignKey("Vacancy")]
-        public Int32 VacancyId { get; private set; }
-        public Summary Summary { get; private set; }
-
-        [ForeignKey("Summary")]
-        public Int32 SummaryId { get; private set; }
-        public Vacancy Vacancy { get; private set; }
+        public Summary Summary { get; }
+        public Vacancy Vacancy { get; }
         
         public MatchStatus Status { get; private set; }
 
-        public Match()
-        {
-        }
-
-        public Match(Summary summary, Vacancy vacancy)
+        public Match(Summary summary, Vacancy vacancy, MatchStatus status = MatchStatus.Half)
         {
             Summary = summary;
-            SummaryId = summary.Id;
-
             Vacancy = vacancy;
-            VacancyId = vacancy.Id;
-
-            Status = MatchStatus.Half;
+            Status = status;
         }
 
         public void Update()

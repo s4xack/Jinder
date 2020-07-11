@@ -8,10 +8,15 @@ namespace Jinder.Dal.Repositories.Mocks
     public class SkillRepositoryMock : ISkillRepository
     {
         private readonly List<Skill> _skills;
+        private Int32 _newId;
 
         public SkillRepositoryMock(List<Skill> skills)
         {
             _skills = skills;
+            _newId = 0;
+            foreach (var skill in _skills) 
+                skill.Id = _newId++;
+
         }
 
         public SkillRepositoryMock() : this(new List<Skill>())
@@ -32,6 +37,7 @@ namespace Jinder.Dal.Repositories.Mocks
 
         public Skill Add(Skill skill)
         {
+            skill.Id = _newId++;
             _skills.Add(skill);
             return skill;
         }

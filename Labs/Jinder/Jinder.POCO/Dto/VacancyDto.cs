@@ -31,7 +31,7 @@ namespace Jinder.Poco.Dto
                 vacancy.User.Id,
                 vacancy.Id,
                 vacancy.Specialization.Name,
-                vacancy.Skills.Select(s => s.Skill.Name).ToList(),
+                vacancy.Skills.Select(s => s.Name).ToList(),
                 vacancy.Information);
         }
 
