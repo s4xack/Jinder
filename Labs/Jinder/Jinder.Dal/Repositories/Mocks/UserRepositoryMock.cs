@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Jinder.Poco.Dto;
 using Jinder.Poco.Models;
 using Jinder.Poco.Types;
 
@@ -9,7 +10,7 @@ namespace Jinder.Dal.Repositories.Mocks
     public class UserRepositoryMock : IUserRepository
     {
         private readonly List<User> _users;
-        private Int32 _newId;
+        private readonly Int32 _newId;
 
         public UserRepositoryMock(List<User> users)
         {
@@ -34,6 +35,11 @@ namespace Jinder.Dal.Repositories.Mocks
         {
             return _users.FirstOrDefault(u => u.Id == userId) ??
                    throw new ArgumentException($"No user with id {userId}!");
+        }
+
+        public User Add(User user)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Jinder.Dal.Repositories
         VacancySuggestion Get(Int32 suggestionId);
         IReadOnlyCollection<VacancySuggestion> GetAllForSummary(Int32 summaryId);
         IReadOnlyCollection<VacancySuggestion> GetForSummaryByState(Int32 summaryId, SuggestionStatus state);
-        IReadOnlyCollection<VacancySuggestion> Add(IReadOnlyCollection<VacancySuggestion> summarySuggestions);
+        IReadOnlyCollection<VacancySuggestion> Add(IReadOnlyCollection<VacancySuggestion> vacancySuggestions);
         VacancySuggestion Update(VacancySuggestion vacancySuggestion);
     }
 }

@@ -44,5 +44,16 @@ namespace Jinder.Dal.Repositories.Mocks
             _matches.Add(match);
             return match;
         }
+
+        public Match Update(Match match)
+        {
+            Match oldMatch = _matches.Find(m => m.Id == match.Id) ??
+                             throw new ArgumentException($"No match with id {match.Id}");
+
+            _matches.Remove(oldMatch);
+            _matches.Add(match);
+
+            return match;
+        }
     }
 }

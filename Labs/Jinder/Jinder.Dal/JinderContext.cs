@@ -29,10 +29,6 @@ namespace Jinder.Dal
             Database.EnsureCreated();
         }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Jinder;Trusted_Connection=True;");
-        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
