@@ -2,8 +2,8 @@
 {
     public enum UserType
     {
-        Administrator,
-        Candidate,
-        Recruiter
+        Administrator = 1,
+        Candidate = 2,
+        Recruiter = 3
     }
 }

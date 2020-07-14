@@ -80,5 +80,21 @@ namespace Jinder.Api.Controllers
                 return NotFound(e.Message);
             }
         }
+
+        [HttpPost]
+        [Route("create/")]
+        [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<UserDto> Create([FromBody]CreateUserDto user)
+        {
+            try
+            {
+                return Ok(_userService.Create(user));
+            }
+            catch (ArgumentException e)
+            {
+                return NotFound(e.Message);
+            }
+        }
     }
 }

@@ -10,6 +10,10 @@ namespace Jinder.Poco.Dto
         public String Email { get; set; }
         public UserType Type { get; set; }
 
+        public CreateUserDto()
+        {
+        }
+
         [JsonConstructor]
         public CreateUserDto(String name, String email, UserType type)
         {

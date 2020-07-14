@@ -2,9 +2,9 @@
 {
     public enum SuggestionStatus
     {
-        Ready,
-        Accepted,
-        Rejected,
-        Skipped
+        Ready = 1,
+        Accepted = 2,
+        Rejected = 3,
+        Skipped = 4
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Jinder.Dal.Repositories;
 using Jinder.Poco.Dto;
+using Jinder.Poco.Models;
 
 namespace Jinder.Core.Services
 {
@@ -26,6 +27,13 @@ namespace Jinder.Core.Services
         public UserDto Get(Int32 userId)
         {
             return UserDto.Create(_userRepository.Get(userId));
+        }
+
+        public UserDto Create(CreateUserDto user)
+        {
+            User newUser = _userRepository.Add(new User(user.Email, user.Name, user.Type));
+
+            return UserDto.Create(newUser);
         }
     }
 }

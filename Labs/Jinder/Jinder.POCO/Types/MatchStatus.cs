@@ -2,7 +2,7 @@
 {
     public enum MatchStatus
     {
-        Half,
-        Full
+        Half = 1,
+        Full = 2
     }
 }

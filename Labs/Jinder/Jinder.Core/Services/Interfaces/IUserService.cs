@@ -8,5 +8,6 @@ namespace Jinder.Core.Services
     {
         List<UserDto> GetAll();
         UserDto Get(Int32 userId);
+        UserDto Create(CreateUserDto user);
     }
 }

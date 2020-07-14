@@ -1,4 +1,5 @@
 using Jinder.Core.Services;
+using Jinder.Dal;
 using Jinder.Dal.Repositories;
 using Jinder.Dal.Repositories.Mocks;
 using Microsoft.AspNetCore.Builder;
@@ -29,14 +30,19 @@ namespace Jinder.Api
             services.TryAddSingleton<ISummarySuggestionService, SummarySuggestionService>();
             services.TryAddSingleton<IVacancySuggestionService, VacancySuggestionService>();
             services.TryAddSingleton<IMatchService, MatchService>();
-            services.TryAddSingleton<IUserRepository, UserRepositoryMock>();
-            services.TryAddSingleton<ISkillRepository, SkillRepositoryMock>();
-            services.TryAddSingleton<ISpecializationRepository, SpecializationRepositoryMock>();
-            services.TryAddSingleton<ISummaryRepository, SummaryRepositoryMock>();
-            services.TryAddSingleton<IVacancyRepository, VacancyRepositoryMock>();
-            services.TryAddSingleton<ISummarySuggestionRepository, SummarySuggestionRepositoryMock>();
-            services.TryAddSingleton<IVacancySuggestionRepository, VacancySuggestionRepositoryMock>();
-            services.TryAddSingleton<IMatchRepository, MatchRepositoryMock>();
+            services.TryAddSingleton<ISkillService, SkillService>();
+            services.TryAddSingleton<ISpecializationService, SpecializationService>();
+
+            services.TryAddSingleton<JinderContext, JinderContext>();
+
+            services.TryAddSingleton<IUserRepository, UserRepository>();
+            services.TryAddSingleton<ISkillRepository, SkillRepository>();
+            services.TryAddSingleton<ISpecializationRepository, SpecializationRepository>();
+            services.TryAddSingleton<ISummaryRepository, SummaryRepository>();
+            services.TryAddSingleton<IVacancyRepository, VacancyRepository>();
+            services.TryAddSingleton<ISummarySuggestionRepository, SummarySuggestionRepository>();
+            services.TryAddSingleton<IVacancySuggestionRepository, VacancySuggestionRepository>();
+            services.TryAddSingleton<IMatchRepository, MatchRepository>();
 
 
             services.AddControllers();
