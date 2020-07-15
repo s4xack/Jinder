@@ -81,7 +81,10 @@ namespace Jinder.Core.Services
                 _matchRepository.Add(new Match(summary, vacancy));
             }
             else
+            {
                 match.Update();
+                _matchRepository.Update(match);
+            }
         }
     }
 }
