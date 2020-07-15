@@ -64,7 +64,7 @@ namespace Jinder.Api.Controllers
         [Route("get/me")]
         [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public ActionResult<UserDto> GetMyself(Guid token)
+        public ActionResult<UserDto> GetMyself([FromHeader]Guid token)
         {
             try
             {
