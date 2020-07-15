@@ -33,10 +33,11 @@ namespace Jinder.Dal.Repositories
 
         public User Add(User user)
         {
-            user = _context.Users
-                .Add(DbUser.FromModel(user))
-                .Entity
-                .ToModel();
+            DbUser dbUser = DbUser.FromModel(user);
+
+            dbUser = _context.Users
+                .Add(dbUser)
+                .Entity;
             try
             {
                 _context.SaveChanges();
@@ -46,7 +47,7 @@ namespace Jinder.Dal.Repositories
                 throw new ArgumentException("Unable to create user with such data!");
             }
 
-            return user;
+            return dbUser.ToModel();
         }
     }
 }

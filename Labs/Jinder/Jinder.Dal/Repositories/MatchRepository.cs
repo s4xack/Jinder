@@ -20,10 +20,14 @@ namespace Jinder.Dal.Repositories
         {
             return _context.Matches
                 .Include(m => m.Summary)
+                    .ThenInclude(s => s.User)
+                .Include(m => m.Summary)
                     .ThenInclude(s => s.Specialization)
                 .Include(m => m.Summary)
                     .ThenInclude(s => s.Skills)
                         .ThenInclude(s => s.Skill)
+                .Include(m => m.Vacancy)
+                    .ThenInclude(v => v.User)
                 .Include(m => m.Vacancy)
                     .ThenInclude(v => v.Specialization)
                 .Include(m => m.Vacancy)
@@ -37,10 +41,14 @@ namespace Jinder.Dal.Repositories
         {
             return _context.Matches
                 .Include(m => m.Summary)
+                    .ThenInclude(s => s.User)
+                .Include(m => m.Summary)
                     .ThenInclude(s => s.Specialization)
                 .Include(m => m.Summary)
                     .ThenInclude(s => s.Skills)
-                .ThenInclude(s => s.Skill)
+                        .ThenInclude(s => s.Skill)
+                .Include(m => m.Vacancy)
+                    .ThenInclude(v => v.User)
                 .Include(m => m.Vacancy)
                     .ThenInclude(v => v.Specialization)
                 .Include(m => m.Vacancy)
@@ -55,15 +63,19 @@ namespace Jinder.Dal.Repositories
         {
             return _context.Matches
                 .Include(m => m.Summary)
-                .ThenInclude(s => s.Specialization)
+                    .ThenInclude(s => s.User)
                 .Include(m => m.Summary)
-                .ThenInclude(s => s.Skills)
-                .ThenInclude(s => s.Skill)
+                    .ThenInclude(s => s.Specialization)
+                .Include(m => m.Summary)
+                    .ThenInclude(s => s.Skills)
+                        .ThenInclude(s => s.Skill)
                 .Include(m => m.Vacancy)
-                .ThenInclude(v => v.Specialization)
+                    .ThenInclude(v => v.User)
                 .Include(m => m.Vacancy)
-                .ThenInclude(v => v.Skills)
-                .ThenInclude(s => s.Skill)
+                    .ThenInclude(v => v.Specialization)
+                .Include(m => m.Vacancy)
+                    .ThenInclude(v => v.Skills)
+                        .ThenInclude(s => s.Skill)
                 .Where(m => m.VacancyId == vacancyId)
                 .Select(m => m.ToModel())
                 .ToList();
@@ -71,10 +83,11 @@ namespace Jinder.Dal.Repositories
 
         public Match Add(Match match)
         {
-            match = _context.Matches
-                .Add(DbMatch.FromModel(match))
-                .Entity
-                .ToModel();
+            DbMatch dbMatch = DbMatch.FromModel(match);
+
+            dbMatch = _context.Matches
+                .Add(dbMatch)
+                .Entity;
 
             try
             {
@@ -85,15 +98,20 @@ namespace Jinder.Dal.Repositories
                 throw new ArgumentException("Unable to create Match with such data!");
             }
 
-            return match;
+            return dbMatch.ToModel();
         }
 
         public Match Update(Match match)
         {
-            match = _context.Matches
-                .Update(DbMatch.FromModel(match))
-                .Entity
-                .ToModel();
+            DbMatch dbMatch = _context.Matches
+                                  .SingleOrDefault(m => m.Id == match.Id) ??
+                              throw new ArgumentException($"No natch with id {match.Id}!");
+
+            dbMatch.Status = match.Status;
+
+            dbMatch = _context.Matches
+                .Update(dbMatch)
+                .Entity;
 
             try
             {
@@ -104,7 +122,7 @@ namespace Jinder.Dal.Repositories
                 throw new ArgumentException("Unable to create summary suggestions with such data!");
             }
 
-            return match;
+            return dbMatch.ToModel();
         }
     }
 }

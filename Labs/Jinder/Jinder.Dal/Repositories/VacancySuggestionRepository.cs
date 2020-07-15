@@ -20,16 +20,20 @@ namespace Jinder.Dal.Repositories
         public VacancySuggestion Get(Int32 suggestionId)
         {
             return _context.VacancySuggestions
-                .Include(v => v.Summary)
+                .Include(s => s.Summary)
+                    .ThenInclude(s => s.User)
+                .Include(s => s.Summary)
+                    .ThenInclude(s => s.Specialization)
+                .Include(s => s.Summary)
+                    .ThenInclude(s => s.Skills)
+                        .ThenInclude(s => s.Skill)
+                .Include(s => s.Vacancy)
+                    .ThenInclude(v => v.User)
+                .Include(s => s.Vacancy)
                     .ThenInclude(v => v.Specialization)
-                .Include(v => v.Summary)
+                .Include(s => s.Vacancy)
                     .ThenInclude(v => v.Skills)
                         .ThenInclude(s => s.Skill)
-                .Include(v => v.Vacancy)
-                    .ThenInclude(v => v.Specialization)
-                .Include(v => v.Vacancy)
-                    .ThenInclude(v => v.Skills)
-                        .ThenInclude(v => v.Skill)
                 .SingleOrDefault(v => v.Id == suggestionId)
                 ?.ToModel() ?? throw new ArgumentException($"No vacancy suggestion with id {suggestionId}!");
         }
@@ -37,16 +41,20 @@ namespace Jinder.Dal.Repositories
         public IReadOnlyCollection<VacancySuggestion> GetAllForSummary(Int32 summaryId)
         {
             return _context.VacancySuggestions
-                .Include(v => v.Summary)
+                .Include(s => s.Summary)
+                    .ThenInclude(s => s.User)
+                .Include(s => s.Summary)
+                    .ThenInclude(s => s.Specialization)
+                .Include(s => s.Summary)
+                    .ThenInclude(s => s.Skills)
+                        .ThenInclude(s => s.Skill)
+                .Include(s => s.Vacancy)
+                    .ThenInclude(v => v.User)
+                .Include(s => s.Vacancy)
                     .ThenInclude(v => v.Specialization)
-                .Include(v => v.Summary)
+                .Include(s => s.Vacancy)
                     .ThenInclude(v => v.Skills)
                         .ThenInclude(s => s.Skill)
-                .Include(v => v.Vacancy)
-                    .ThenInclude(v => v.Specialization)
-                .Include(v => v.Vacancy)
-                    .ThenInclude(v => v.Skills)
-                        .ThenInclude(v => v.Skill)
                 .Where(v => v.SummaryId == summaryId)
                 .Select(v => v.ToModel())
                 .ToList();
@@ -55,16 +63,20 @@ namespace Jinder.Dal.Repositories
         public IReadOnlyCollection<VacancySuggestion> GetForSummaryByState(Int32 summaryId, SuggestionStatus state)
         {
             return _context.VacancySuggestions
-                .Include(v => v.Summary)
+                .Include(s => s.Summary)
+                    .ThenInclude(s => s.User)
+                .Include(s => s.Summary)
+                    .ThenInclude(s => s.Specialization)
+                .Include(s => s.Summary)
+                    .ThenInclude(s => s.Skills)
+                        .ThenInclude(s => s.Skill)
+                .Include(s => s.Vacancy)
+                    .ThenInclude(v => v.User)
+                .Include(s => s.Vacancy)
                     .ThenInclude(v => v.Specialization)
-                .Include(v => v.Summary)
+                .Include(s => s.Vacancy)
                     .ThenInclude(v => v.Skills)
                         .ThenInclude(s => s.Skill)
-                .Include(v => v.Vacancy)
-                    .ThenInclude(v => v.Specialization)
-                .Include(v => v.Vacancy)
-                    .ThenInclude(v => v.Skills)
-                        .ThenInclude(v => v.Skill)
                 .Where(v => v.SummaryId == summaryId)
                 .Where(v => v.Status == state)
                 .Select(v => v.ToModel())
@@ -73,11 +85,14 @@ namespace Jinder.Dal.Repositories
 
         public IReadOnlyCollection<VacancySuggestion> Add(IReadOnlyCollection<VacancySuggestion> vacancySuggestions)
         {
-            vacancySuggestions = vacancySuggestions
+            List<DbVacancySuggestion> dbVacancySuggestions = vacancySuggestions
+                .Select(DbVacancySuggestion.FromModel)
+                .ToList();
+
+            dbVacancySuggestions = dbVacancySuggestions
                 .Select(v => _context.VacancySuggestions
-                    .Add(DbVacancySuggestion.FromModel(v))
-                    .Entity
-                    .ToModel())
+                    .Add(v)
+                    .Entity)
                 .ToList();
 
             try
@@ -89,15 +104,22 @@ namespace Jinder.Dal.Repositories
                 throw new ArgumentException("Unable to create summary suggestions with such data!");
             }
 
-            return vacancySuggestions;
+            return dbVacancySuggestions
+                .Select(s => s.ToModel())
+                .ToList();
         }
 
         public VacancySuggestion Update(VacancySuggestion vacancySuggestion)
         {
-            vacancySuggestion = _context.VacancySuggestions
-                .Update(DbVacancySuggestion.FromModel(vacancySuggestion))
-                .Entity
-                .ToModel();
+            DbVacancySuggestion dbVacancySuggestion = _context.VacancySuggestions
+                                                          .SingleOrDefault(s => s.Id == vacancySuggestion.Id) ??
+                                                      throw new ArgumentException($"No vacancy suggestion with id {vacancySuggestion.Id}!");
+
+            dbVacancySuggestion.Status = vacancySuggestion.Status;
+
+            dbVacancySuggestion = _context.VacancySuggestions
+                .Update(dbVacancySuggestion)
+                .Entity;
 
             try
             {
@@ -108,7 +130,7 @@ namespace Jinder.Dal.Repositories
                 throw new ArgumentException("Unable to create summary suggestions with such data!");
             }
 
-            return vacancySuggestion;
+            return dbVacancySuggestion.ToModel();
         }
     }
 }

@@ -19,6 +19,7 @@ namespace Jinder.Dal.Repositories
         public IReadOnlyCollection<Vacancy> GetAll()
         {
             return _context.Vacancies
+                .Include(s => s.User)
                 .Include(v => v.Specialization)
                 .Include(v => v.Skills)
                 .ThenInclude(v => v.Skill)
@@ -29,6 +30,7 @@ namespace Jinder.Dal.Repositories
         public Vacancy Get(Int32 vacancyId)
         {
             return _context.Vacancies
+                    .Include(s => s.User)
                     .Include(v => v.Specialization)
                     .Include(v => v.Skills)
                        .ThenInclude(v => v.Skill)
@@ -39,19 +41,21 @@ namespace Jinder.Dal.Repositories
         public Vacancy GetForUser(Int32 userId)
         {
             return _context.Vacancies
+                       .Include(s => s.User)
                        .Include(v => v.Specialization)
                        .Include(v => v.Skills)
                             .ThenInclude(v => v.Skill)
                        .SingleOrDefault(v => v.UserId == userId)
-                       ?.ToModel() ?? throw new ArgumentException($"No Vacancy dor user with id {userId}!");
+                       ?.ToModel() ?? throw new ArgumentException($"No Vacancy for user with id {userId}!");
         }
 
         public Vacancy Create(Vacancy vacancy)
         {
-            vacancy = _context.Vacancies
-                .Add(DbVacancy.FromModel(vacancy))
-                .Entity
-                .ToModel();
+            DbVacancy dbVacancy = DbVacancy.FromModel(vacancy);
+
+            dbVacancy = _context.Vacancies
+                .Add(dbVacancy)
+                .Entity;
 
             try
             {
@@ -62,17 +66,18 @@ namespace Jinder.Dal.Repositories
                 throw new ArgumentException("Unable to create Vacancy with such data!");
             }
 
-            return vacancy;
+            return dbVacancy.ToModel();
         }
 
         public Vacancy Delete(Int32 vacancyId)
         {
-            Vacancy vacancy = Get(vacancyId);
+            DbVacancy dbVacancy = _context.Vacancies
+                                      .SingleOrDefault(v => v.Id == vacancyId) ??
+                                  throw new ArgumentException($"No Vacancy with id {vacancyId}!");
 
-            _context.Vacancies
-                .Remove(DbVacancy.FromModel(vacancy))
-                .Entity
-                .ToModel();
+            dbVacancy = _context.Vacancies
+                .Remove(dbVacancy)
+                .Entity;
 
             try
             {
@@ -83,7 +88,7 @@ namespace Jinder.Dal.Repositories
                 throw new ArgumentException("Unable to delete Vacancy with such data!");
             }
 
-            return vacancy;
+            return dbVacancy.ToModel();
         }
 
         public Boolean IsHaveForUser(Int32 userId)

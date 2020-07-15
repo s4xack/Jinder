@@ -14,6 +14,8 @@ namespace Jinder.Dal.DbEntities
         public Int32? UserId { get; set; }
         public DbUser User { get; set; }
 
+        [ForeignKey("Specialization")] 
+        public Int32 SpecializationId { get; set; }
         public DbSpecialization Specialization { get; set; }
         public List<DbVacancySkill> Skills { get; set; }
         public String Information { get; set; }
@@ -28,7 +30,7 @@ namespace Jinder.Dal.DbEntities
             {
                 Id = vacancy.Id,
                 UserId = vacancy.User.Id,
-                Specialization = DbSpecialization.FromModel(vacancy.Specialization),
+                SpecializationId = vacancy.Specialization.Id,
                 Skills = vacancy.Skills.Select(DbVacancySkill.FromModel).ToList(),
                 Information = vacancy.Information
             };

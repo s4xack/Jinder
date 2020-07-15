@@ -32,10 +32,11 @@ namespace Jinder.Dal.Repositories
 
         public Specialization Add(Specialization specialization)
         {
-            specialization = _context.Specializations
-                .Add(DbSpecialization.FromModel(specialization))
-                .Entity
-                .ToModel();
+            DbSpecialization dbSpecialization = DbSpecialization.FromModel(specialization);
+
+            dbSpecialization = _context.Specializations
+                .Add(dbSpecialization)
+                .Entity;
 
             try
             {
@@ -46,17 +47,18 @@ namespace Jinder.Dal.Repositories
                 throw new ArgumentException("Unable to create skill with such data!");
             }
 
-            return specialization;
+            return dbSpecialization.ToModel();
         }
 
         public Specialization DeleteByName(String specializationName)
         {
-            Specialization specialization = GetByName(specializationName);
+            DbSpecialization dbSpecialization = _context.Specializations
+                                                    .SingleOrDefault(s => s.Name == specializationName) ??
+                                                throw new ArgumentException($"No skill with name {specializationName}!");
 
-            specialization = _context.Specializations
-                .Remove(DbSpecialization.FromModel(specialization))
-                .Entity
-                .ToModel();
+            dbSpecialization = _context.Specializations
+                .Remove(dbSpecialization)
+                .Entity;
 
             try
             {
@@ -67,7 +69,7 @@ namespace Jinder.Dal.Repositories
                 throw new ArgumentException("Unable to delete specialization with such name!");
             }
 
-            return specialization;
+            return dbSpecialization.ToModel();
         }
     }
 }

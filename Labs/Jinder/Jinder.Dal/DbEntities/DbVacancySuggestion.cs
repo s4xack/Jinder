@@ -29,7 +29,8 @@ namespace Jinder.Dal.DbEntities
             {
                 Id = vacancySuggestion.Id,
                 SummaryId = vacancySuggestion.Summary.Id,
-                VacancyId = vacancySuggestion.Vacancy.Id
+                VacancyId = vacancySuggestion.Vacancy.Id,
+                Status = vacancySuggestion.Status
             };
         }
 

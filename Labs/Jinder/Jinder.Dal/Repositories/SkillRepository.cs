@@ -32,10 +32,11 @@ namespace Jinder.Dal.Repositories
 
         public Skill Add(Skill skill)
         {
-            skill = _context.Skills
-                .Add(DbSkill.FromModel(skill))
-                .Entity
-                .ToModel();
+            DbSkill dbSkill = DbSkill.FromModel(skill);
+                
+            dbSkill = _context.Skills
+                .Add(dbSkill)
+                .Entity;
 
             try
             {
@@ -46,17 +47,17 @@ namespace Jinder.Dal.Repositories
                 throw new ArgumentException("Unable to create skill with such data!");
             }
 
-            return skill;
+            return dbSkill.ToModel();
         }
 
         public Skill DeleteByName(String skillName)
         {
-            Skill skill = GetByName(skillName);
+            DbSkill dbSkill = _context.Skills.
+                SingleOrDefault(s => s.Name == skillName) ?? throw new ArgumentException($"No skill with name {skillName}!");;
 
-            skill = _context.Skills
-                .Remove(DbSkill.FromModel(skill))
-                .Entity
-                .ToModel();
+            dbSkill = _context.Skills
+                .Remove(dbSkill)
+                .Entity;
 
             try
             {
@@ -67,7 +68,7 @@ namespace Jinder.Dal.Repositories
                 throw new ArgumentException("Unable to delete skill with such name!");
             }
 
-            return skill;
+            return dbSkill.ToModel();
         }
     }
 }

@@ -21,10 +21,14 @@ namespace Jinder.Dal.Repositories
         {
             return _context.SummarySuggestions
                 .Include(s => s.Summary)
+                    .ThenInclude(s => s.User)
+                .Include(s => s.Summary)
                     .ThenInclude(s => s.Specialization)
                 .Include(s => s.Summary)
                     .ThenInclude(s => s.Skills)
                         .ThenInclude(s => s.Skill)
+                .Include(s => s.Vacancy)
+                    .ThenInclude(v => v.User)
                 .Include(s => s.Vacancy)
                     .ThenInclude(v => v.Specialization)
                 .Include(s => s.Vacancy)
@@ -38,10 +42,14 @@ namespace Jinder.Dal.Repositories
         {
             return _context.SummarySuggestions
                 .Include(s => s.Summary)
+                    .ThenInclude(s => s.User)
+                .Include(s => s.Summary)
                     .ThenInclude(s => s.Specialization)
                 .Include(s => s.Summary)
                     .ThenInclude(s => s.Skills)
                         .ThenInclude(s => s.Skill)
+                .Include(s => s.Vacancy)
+                    .ThenInclude(v => v.User)
                 .Include(s => s.Vacancy)
                     .ThenInclude(v => v.Specialization)
                 .Include(s => s.Vacancy)
@@ -56,10 +64,14 @@ namespace Jinder.Dal.Repositories
         {
             return _context.SummarySuggestions
                 .Include(s => s.Summary)
+                    .ThenInclude(s => s.User)
+                .Include(s => s.Summary)
                     .ThenInclude(s => s.Specialization)
                 .Include(s => s.Summary)
                     .ThenInclude(s => s.Skills)
                         .ThenInclude(s => s.Skill)
+                .Include(s => s.Vacancy)
+                    .ThenInclude(v => v.User)
                 .Include(s => s.Vacancy)
                     .ThenInclude(v => v.Specialization)
                 .Include(s => s.Vacancy)
@@ -73,11 +85,14 @@ namespace Jinder.Dal.Repositories
 
         public IReadOnlyCollection<SummarySuggestion> Add(IReadOnlyCollection<SummarySuggestion> summarySuggestions)
         {
-            summarySuggestions = summarySuggestions
+            List<DbSummarySuggestion> dbSummarySuggestions = summarySuggestions
+                .Select(DbSummarySuggestion.FromModel)
+                .ToList();
+
+            dbSummarySuggestions = dbSummarySuggestions
                 .Select(s => _context.SummarySuggestions
-                    .Add(DbSummarySuggestion.FromModel(s))
-                    .Entity
-                    .ToModel())
+                    .Add(s)
+                    .Entity)
                 .ToList();
 
             try
@@ -89,15 +104,22 @@ namespace Jinder.Dal.Repositories
                 throw new ArgumentException("Unable to create summary suggestions with such data!");
             }
 
-            return summarySuggestions;
+            return dbSummarySuggestions
+                .Select(s => s.ToModel())
+                .ToList();
         }
 
         public SummarySuggestion Update(SummarySuggestion summarySuggestion)
         {
-            summarySuggestion = _context.SummarySuggestions
-                .Update(DbSummarySuggestion.FromModel(summarySuggestion))
-                .Entity
-                .ToModel();
+            DbSummarySuggestion dbSummarySuggestion = _context.SummarySuggestions
+                                                          .SingleOrDefault(s => s.Id == summarySuggestion.Id) ??
+                                                      throw new ArgumentException($"No summary suggestion with id {summarySuggestion.Id}!");
+            
+            dbSummarySuggestion.Status = summarySuggestion.Status;
+
+            dbSummarySuggestion = _context.SummarySuggestions
+                .Update(dbSummarySuggestion)
+                .Entity;
 
             try
             {
@@ -108,7 +130,7 @@ namespace Jinder.Dal.Repositories
                 throw new ArgumentException("Unable to create summary suggestions with such data!");
             }
 
-            return summarySuggestion;
+            return dbSummarySuggestion.ToModel();
         }
     }
 }
