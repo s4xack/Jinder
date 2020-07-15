@@ -41,12 +41,12 @@ namespace Jinder.Api.Controllers
             }
             catch (ArgumentException e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
             }
         }
 
         [HttpGet]
-        [Route("candidate/get/all/")]
+        [Route("recruiter/get/all/")]
         [ProducesResponseType(typeof(List<VacancyDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -63,7 +63,7 @@ namespace Jinder.Api.Controllers
             }
             catch (ArgumentException e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
             }
         }
     }

@@ -129,11 +129,12 @@ namespace Jinder.Api.Controllers
             }
             catch (ArgumentException e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
             }
         }
 
         [HttpDelete]
+        [Route("delete/{vacancyId}")]
         [ProducesResponseType(typeof(VacancyDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
