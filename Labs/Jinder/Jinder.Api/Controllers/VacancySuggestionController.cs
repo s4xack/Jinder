@@ -71,7 +71,7 @@ namespace Jinder.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<VacancySuggestionDto> Accept([FromHeader]Guid token, Int32 suggestionId)
+        public ActionResult Accept([FromHeader]Guid token, Int32 suggestionId)
         {
             try
             {
@@ -94,7 +94,7 @@ namespace Jinder.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<VacancySuggestionDto> Reject([FromHeader]Guid token, Int32 suggestionId)
+        public ActionResult Reject([FromHeader]Guid token, Int32 suggestionId)
         {
             try
             {
@@ -117,7 +117,7 @@ namespace Jinder.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<VacancySuggestionDto> Skip([FromHeader]Guid token, Int32 suggestionId)
+        public ActionResult Skip([FromHeader]Guid token, Int32 suggestionId)
         {
             try
             {
