@@ -11,7 +11,7 @@ namespace Jinder.Desktop.Services.Mock
             return Candidate.Summary;
         }
 
-        public SummaryDto CreateForMe(Guid token)
+        public SummaryDto CreateForMe(Guid token, CreateSummaryDto summary)
         {
             throw new NotImplementedException();
         }

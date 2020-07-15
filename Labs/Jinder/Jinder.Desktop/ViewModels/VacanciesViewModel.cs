@@ -22,7 +22,7 @@ namespace Jinder.Desktop.ViewModels
 
         public VacanciesViewModel()
         {
-            _vacancyService = new VacancyServiceMock();
+            _vacancyService = new VacancyService();
             _vacancy = _vacancyService.GetForMe(Session.Token);
         }
     }

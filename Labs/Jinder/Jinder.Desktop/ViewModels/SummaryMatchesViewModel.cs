@@ -15,7 +15,7 @@ namespace Jinder.Desktop.ViewModels
 
         public SummaryMatchesViewModel()
         {
-            _matchService = new MatchServiceMock();
+            _matchService = new MatchService();
             Summaries = _matchService.GetAllForRecruiter(Session.Token);
         }
     }

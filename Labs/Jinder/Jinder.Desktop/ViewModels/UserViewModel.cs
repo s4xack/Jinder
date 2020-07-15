@@ -28,7 +28,7 @@ namespace Jinder.Desktop.ViewModels
 
         public UserViewModel()
         {
-            _userService = new UserServiceMock();
+            _userService = new UserService();
             _user = _userService.GetMe(Session.Token);
         }
     }

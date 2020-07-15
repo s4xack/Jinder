@@ -27,7 +27,7 @@ namespace Jinder.Desktop.ViewModels
 
         public SummarySuggestionsViewModel()
         {
-            _summarySuggestionService = new SummarySuggestionServiceMock();
+            _summarySuggestionService = new SummarySuggestionService();
             SummarySuggestion = _summarySuggestionService.GetForMe(Session.Token);
 
             AcceptCommand = new BaseCommand(arg =>

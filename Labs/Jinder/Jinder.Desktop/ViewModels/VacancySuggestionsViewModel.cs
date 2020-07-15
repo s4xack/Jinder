@@ -28,7 +28,7 @@ namespace Jinder.Desktop.ViewModels
 
         public VacancySuggestionsViewModel()
         {
-            _vacancySuggestionService = new VacancySuggestionServiceMock();
+            _vacancySuggestionService = new VacancySuggestionService();
             VacancySuggestion = _vacancySuggestionService.GetForMe(Session.Token);
 
             AcceptCommand = new BaseCommand(arg =>

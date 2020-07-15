@@ -49,7 +49,7 @@ namespace Jinder.Desktop.ViewModels
         
         public MenuViewModel()
         {
-            _userService = new UserServiceMock();
+            _userService = new UserService();
             UserDto user = _userService.GetMe(Session.Token);
 
             if (user.Type == UserType.Candidate)

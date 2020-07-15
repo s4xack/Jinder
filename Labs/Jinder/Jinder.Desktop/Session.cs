@@ -9,5 +9,7 @@ namespace Jinder.Desktop
             get; 
             set;
         }
+
+        public static String HostUrl => "http://localhost:49616";
     }
 }

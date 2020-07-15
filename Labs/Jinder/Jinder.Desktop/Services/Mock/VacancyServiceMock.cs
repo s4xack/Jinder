@@ -11,7 +11,7 @@ namespace Jinder.Desktop.Services.Mock
             return Recruiter.Vacancy;
         }
 
-        public VacancyDto CreateForMe(Guid token)
+        public VacancyDto CreateForMe(Guid token, CreateVacancyDto vacancy)
         {
             throw new NotImplementedException();
         }

@@ -22,7 +22,7 @@ namespace Jinder.Desktop.ViewModels
 
         public SummariesViewModel()
         {
-            _summaryService = new SummaryServiceMock();
+            _summaryService = new SummaryService();
             _summary = _summaryService.GetForMe(Session.Token);
         }
     }

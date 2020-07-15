@@ -13,7 +13,7 @@ namespace Jinder.Desktop.ViewModels
 
         public VacancyMatchesViewModel()
         {
-            _matchService = new MatchServiceMock();
+            _matchService = new MatchService();
             Vacancies = _matchService.GetAllForCandidate(Session.Token);
         }
     }
