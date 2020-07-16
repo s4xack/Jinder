@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jinder.Dal", "Jinder.Dal\Ji
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jinder.Core", "Jinder.Core\Jinder.Core.csproj", "{B260959F-0A81-41B3-86E7-99F20584DE85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jinder.Desktop", "Jinder.Desktop\Jinder.Desktop.csproj", "{46783DD2-D56E-4AA4-9FE5-D39A67D47C69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jinder.Desktop", "Jinder.Desktop\Jinder.Desktop.csproj", "{46783DD2-D56E-4AA4-9FE5-D39A67D47C69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jinder.Auth", "Jinder.Auth\Jinder.Auth.csproj", "{F57176A8-5A79-4D69-95A6-38250A9A67FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,14 @@ Global
 		{46783DD2-D56E-4AA4-9FE5-D39A67D47C69}.Release|Any CPU.Build.0 = Release|Any CPU
 		{46783DD2-D56E-4AA4-9FE5-D39A67D47C69}.Release|x64.ActiveCfg = Release|Any CPU
 		{46783DD2-D56E-4AA4-9FE5-D39A67D47C69}.Release|x64.Build.0 = Release|Any CPU
+		{F57176A8-5A79-4D69-95A6-38250A9A67FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F57176A8-5A79-4D69-95A6-38250A9A67FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F57176A8-5A79-4D69-95A6-38250A9A67FC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F57176A8-5A79-4D69-95A6-38250A9A67FC}.Debug|x64.Build.0 = Debug|Any CPU
+		{F57176A8-5A79-4D69-95A6-38250A9A67FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F57176A8-5A79-4D69-95A6-38250A9A67FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F57176A8-5A79-4D69-95A6-38250A9A67FC}.Release|x64.ActiveCfg = Release|Any CPU
+		{F57176A8-5A79-4D69-95A6-38250A9A67FC}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
