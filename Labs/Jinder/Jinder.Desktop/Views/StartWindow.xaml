@@ -9,7 +9,7 @@
         xmlns:viewModels="clr-namespace:Jinder.Desktop.ViewModels"
         mc:Ignorable="d"
         Title="Login" 
-        Width="460" Height="350">
+        Width="460" Height="100">
     <Window.DataContext>
         <viewModels:StartViewModel></viewModels:StartViewModel>
     </Window.DataContext>
@@ -21,12 +21,10 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Image Width="200" Height="200" Margin="15" Stretch="Fill"></Image>
-                <Button HorizontalAlignment="Center" Margin="0, 0, 0, 15" Command="{Binding EnterAsCandidateCommand}">Ivan</Button>
+                <Button HorizontalAlignment="Center" Margin="0, 0, 0, 15" Command="{Binding EnterAsCandidateCommand}">Candidate</Button>
             </StackPanel>
             <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Image Width="200" Height="200" Margin="15" Stretch="Fill"></Image>
-                <Button HorizontalAlignment="Center" Margin="0, 0, 0, 15" Command="{Binding EnterAsRecruiterCommand}">Shepherd</Button>
+                <Button HorizontalAlignment="Center" Margin="0, 0, 0, 15" Command="{Binding EnterAsRecruiterCommand}">Recruiter</Button>
             </StackPanel>
         </Grid>
     </StackPanel>

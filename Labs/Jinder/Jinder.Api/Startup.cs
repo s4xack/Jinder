@@ -24,6 +24,7 @@ namespace Jinder.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.TryAddSingleton<IAccessService, FreeAccessService>();
+            services.TryAddSingleton<IAuthorizeService, AuthorizeService>();
             services.TryAddSingleton<IUserService, UserService>();
             services.TryAddSingleton<ISummaryService, SummaryService>();
             services.TryAddSingleton<IVacancyService, VacancyService>();
