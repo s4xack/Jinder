@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWaitAll", "MyWaitAll\MyWa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{2393679F-FC78-4CB1-B598-158B14D659B4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProvidersConsumers", "ProvidersConsumers\ProvidersConsumers.csproj", "{7EBA5673-DE20-4732-ADE2-630FC64248DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2393679F-FC78-4CB1-B598-158B14D659B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2393679F-FC78-4CB1-B598-158B14D659B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2393679F-FC78-4CB1-B598-158B14D659B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EBA5673-DE20-4732-ADE2-630FC64248DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EBA5673-DE20-4732-ADE2-630FC64248DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EBA5673-DE20-4732-ADE2-630FC64248DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EBA5673-DE20-4732-ADE2-630FC64248DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -29,7 +35,7 @@ Global
 		SolutionGuid = {F57C6384-9A10-4506-9F7A-05201796A7FA}
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://dev.azure.com/veeamacademy
 		SccLocalPath0 = .
@@ -39,5 +45,8 @@ Global
 		SccProjectUniqueName2 = Tests\\Tests.csproj
 		SccProjectName2 = Tests
 		SccLocalPath2 = Tests
+		SccProjectUniqueName3 = ProvidersConsumers\\ProvidersConsumers.csproj
+		SccProjectName3 = ProvidersConsumers
+		SccLocalPath3 = ProvidersConsumers
 	EndGlobalSection
 EndGlobal
