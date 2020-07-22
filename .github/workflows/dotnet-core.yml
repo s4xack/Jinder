@@ -18,7 +18,7 @@ jobs:
       with:
         dotnet-version: 3.1.301
     - name: Move to solution directory
-      run: cd Source/Jinder
+      run: ls Source
     - name: Install dependencies
       run: dotnet restore 
     - name: Build
