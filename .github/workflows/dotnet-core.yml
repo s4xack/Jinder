@@ -18,7 +18,8 @@ jobs:
       with:
         dotnet-version: 3.1.301
     - name: Install dependencies
-      run: dotnet restore ./Source/Jinder/
+      run: dotnet restore 
+      working-directory: ./Source/Jinder
     - name: Build
       run: dotnet build --configuration Release --no-restore
       working-directory: ./Source/Jinder
