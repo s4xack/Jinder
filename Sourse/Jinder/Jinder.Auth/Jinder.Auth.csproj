@@ -13,5 +13,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Jinder.Poco\Jinder.Poco.csproj" />
+  </ItemGroup>
+
 
 </Project>

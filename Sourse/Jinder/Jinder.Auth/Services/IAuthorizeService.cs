@@ -1,11 +1,12 @@
 ﻿using System;
+using Jinder.Poco.Dto;
 
 namespace Jinder.Auth.Services
 {
     public interface IAuthorizeService
     {
-        Guid Login(string login, string password);
-        Boolean Register(string login, string password, Int32 userId);
+        Guid Login(LoginDto credentials);
+        Boolean Register(RegisterDto credentials);
         Boolean ValidateLogin(string login);
         Int32 ValidateToken(Guid token);
     }

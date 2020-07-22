@@ -5,9 +5,9 @@ namespace Jinder.Core.Services
 {
     public interface IAuthorizeService
     {
-        Guid Login(string login, string password);
+        Guid Login(LoginDto credentials);
 
-        Boolean Register(string login, string password, CreateUserDto user);
+        Boolean Register(CreateAccountDto credentials);
 
         Boolean ValidateLogin(string login);
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Jinder.Auth.Services;
+using Jinder.Poco.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,15 +22,15 @@ namespace Jinder.Auth.Controllers
             _authorizeService = authorizeService ?? throw new ArgumentNullException(nameof(authorizeService));
         }
 
-        [HttpGet]
-        [Route("login/{login}/{password}")]
+        [HttpPost]
+        [Route("login")]
         [ProducesResponseType(typeof(Guid), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Guid> Login(string login, string password)
+        public ActionResult<Guid> Login([FromBody]LoginDto credentials)
         {
             try
             {
-                return Ok(_authorizeService.Login(login, password));
+                return Ok(_authorizeService.Login(credentials));
             }
             catch (ArgumentException e)
             {
@@ -37,12 +38,12 @@ namespace Jinder.Auth.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("register/{userId}/{login}/{password}")]
+        [HttpPost]
+        [Route("register")]
         [ProducesResponseType(typeof(Guid), StatusCodes.Status200OK)]
-        public ActionResult<Boolean> Register(string login, string password, Int32 userId)
+        public ActionResult<Boolean> Register([FromBody]RegisterDto credentials)
         {
-            return Ok(_authorizeService.Register(login, password, userId));
+            return Ok(_authorizeService.Register(credentials));
         }
 
         [HttpGet]

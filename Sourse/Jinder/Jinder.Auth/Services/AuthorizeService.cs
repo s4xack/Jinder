@@ -1,6 +1,7 @@
 ﻿using System;
 using Jinder.Auth.Models;
 using Jinder.Auth.Repositories;
+using Jinder.Poco.Dto;
 
 namespace Jinder.Auth.Services
 {
@@ -13,19 +14,20 @@ namespace Jinder.Auth.Services
             _accountRepository = accountRepository ?? throw new ArgumentNullException(nameof(accountRepository));
         }
 
-        public Guid Login(String login, String password)
+        public Guid Login(LoginDto credentials)
         {
-            return _accountRepository.Get(login, password).Token;
+            return _accountRepository.Get(credentials.Login, credentials.Password).Token;
         }
 
-        public Boolean Register(String login, String password, Int32 userId)
+        public Boolean Register(RegisterDto credentials)
         {
-            if (!ValidateLogin(login))
+            if (!ValidateLogin(credentials.Login))
                 return false;
 
             try
             {
-                _accountRepository.Create(new Account() {Login = login, Password = password, UserId = userId});
+                _accountRepository.Create(new Account()
+                    {Login = credentials.Login, Password = credentials.Password, UserId = credentials.UserId});
                 return true;
             }
             catch (ArgumentException)

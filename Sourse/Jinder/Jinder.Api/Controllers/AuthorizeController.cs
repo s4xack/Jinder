@@ -22,15 +22,15 @@ namespace Jinder.Api.Controllers
             _authorizeService = authorizeService ?? throw new ArgumentNullException(nameof(authorizeService));
         }
 
-        [HttpGet]
-        [Route("login/{login}/{password}")]
+        [HttpPost]
+        [Route("login")]
         [ProducesResponseType(typeof(Guid), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Guid> Login(string login, string password)
+        public ActionResult<Guid> Login([FromBody]LoginDto credentials)
         {
             try
             {
-                return Ok(_authorizeService.Login(login, password));
+                return Ok(_authorizeService.Login(credentials));
             }
             catch (ArgumentException)
             {
@@ -39,11 +39,11 @@ namespace Jinder.Api.Controllers
         }
 
         [HttpPost]
-        [Route("register/{login}/{password}")]
+        [Route("register")]
         [ProducesResponseType(typeof(Boolean), StatusCodes.Status200OK)]
-        public ActionResult<Boolean> Register(string login, string password, [FromBody] CreateUserDto user)
+        public ActionResult<Boolean> Register([FromBody] CreateAccountDto credentials)
         {
-            return Ok(_authorizeService.Register(login, password, user));
+            return Ok(_authorizeService.Register(credentials));
         }
 
         [HttpGet]

@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Jinder.Poco.Dto;
 using Refit;
 
 namespace Jinder.Core.Clients
 {
     public interface IAuthorizeClient
     {
-        [Get("/authorize/login/{login}/{password}")]
-        Task<Guid> Login(string login, string password);
+        [Post("/authorize/login")]
+        Task<Guid> Login([Body]LoginDto credentials);
 
-        [Get("/authorize/register/{userId}/{login}/{password}")]
-        Task<Boolean> Register(string login, string password, Int32 userId);
+        [Post("/authorize/register")]
+        Task<Boolean> Register([Body]RegisterDto credentials);
 
         [Get("/authorize/validate/login/{login}")]
         Task<Boolean> ValidateLogin(string login);

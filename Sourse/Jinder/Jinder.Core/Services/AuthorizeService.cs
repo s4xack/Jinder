@@ -17,11 +17,11 @@ namespace Jinder.Core.Services
             _authorizeClient = authorizeClient ?? throw new ArgumentNullException(nameof(authorizeClient));
         }
 
-        public Guid Login(String login, String password)
+        public Guid Login(LoginDto credentials)
         {
             try
             {
-                return _authorizeClient.Login(login, password).Result;
+                return _authorizeClient.Login(credentials).Result;
             }
             catch (AggregateException)
             {
@@ -29,14 +29,15 @@ namespace Jinder.Core.Services
             }
         }
 
-        public Boolean Register(String login, String password, CreateUserDto user)
+        public Boolean Register(CreateAccountDto credentials)
         {
-            if (!_authorizeClient.ValidateLogin(login).Result)
+            if (!_authorizeClient.ValidateLogin(credentials.Login).Result)
                 return true;
 
-            Int32 userId = _userService.Create(user).Id;
+            Int32 userId = _userService.Create(credentials.User).Id;
 
-            return _authorizeClient.Register(login, password, userId).Result;
+            return _authorizeClient.Register(new RegisterDto()
+                {Login = credentials.Login, Password = credentials.Password, UserId = userId}).Result;
         }
 
         public Boolean ValidateLogin(String login)
