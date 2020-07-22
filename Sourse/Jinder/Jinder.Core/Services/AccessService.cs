@@ -8,9 +8,9 @@ namespace Jinder.Core.Services
     {
         private readonly IAuthorizeClient _authorizeClient;
 
-        public AccessService()
+        public AccessService(IAuthorizeClient authorizeClient)
         {
-            _authorizeClient = RestService.For<IAuthorizeClient>("http://localhost:64642");
+            _authorizeClient = authorizeClient ?? throw new ArgumentNullException(nameof(authorizeClient));
         }
 
         public Int32 ValidateToken(Guid token)

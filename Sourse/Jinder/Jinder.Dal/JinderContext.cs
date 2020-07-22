@@ -23,12 +23,6 @@ namespace Jinder.Dal
         {
         }
 
-        public JinderContext()
-            : base(new DbContextOptionsBuilder().UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Jinder;Trusted_Connection=True;").Options)
-        {
-            Database.EnsureCreated();
-        }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

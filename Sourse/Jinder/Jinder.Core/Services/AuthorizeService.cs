@@ -10,11 +10,11 @@ namespace Jinder.Core.Services
         private readonly IAuthorizeClient _authorizeClient;
         private readonly IUserService _userService;
 
-        public AuthorizeService(IUserService userService)
+        public AuthorizeService(IUserService userService, IAuthorizeClient authorizeClient)
         {
             _userService = userService ?? throw new ArgumentNullException(nameof(userService));
 
-            _authorizeClient = RestService.For<IAuthorizeClient>("http://localhost:64642");
+            _authorizeClient = authorizeClient ?? throw new ArgumentNullException(nameof(authorizeClient));
         }
 
         public Guid Login(String login, String password)

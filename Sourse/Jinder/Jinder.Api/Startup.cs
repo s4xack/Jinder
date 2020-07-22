@@ -1,13 +1,16 @@
+using Jinder.Core.Clients;
 using Jinder.Core.Services;
 using Jinder.Dal;
 using Jinder.Dal.Repositories;
 using Jinder.Dal.Repositories.Mocks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
+using Refit;
 
 namespace Jinder.Api
 {
@@ -23,27 +26,31 @@ namespace Jinder.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.TryAddSingleton<IAccessService, FreeAccessService>();
-            services.TryAddSingleton<IAuthorizeService, AuthorizeService>();
-            services.TryAddSingleton<IUserService, UserService>();
-            services.TryAddSingleton<ISummaryService, SummaryService>();
-            services.TryAddSingleton<IVacancyService, VacancyService>();
-            services.TryAddSingleton<ISummarySuggestionService, SummarySuggestionService>();
-            services.TryAddSingleton<IVacancySuggestionService, VacancySuggestionService>();
-            services.TryAddSingleton<IMatchService, MatchService>();
-            services.TryAddSingleton<ISkillService, SkillService>();
-            services.TryAddSingleton<ISpecializationService, SpecializationService>();
+            services.AddDbContext<JinderContext>(options =>
+                options.UseSqlServer(Configuration["connectionString:JinderDB"]));
 
-            services.TryAddSingleton<JinderContext, JinderContext>();
+            services.AddScoped<IAuthorizeClient>(x =>
+                RestService.For<IAuthorizeClient>(Configuration["connectionString:JinderAuthHost"]));
 
-            services.TryAddSingleton<IUserRepository, UserRepository>();
-            services.TryAddSingleton<ISkillRepository, SkillRepository>();
-            services.TryAddSingleton<ISpecializationRepository, SpecializationRepository>();
-            services.TryAddSingleton<ISummaryRepository, SummaryRepository>();
-            services.TryAddSingleton<IVacancyRepository, VacancyRepository>();
-            services.TryAddSingleton<ISummarySuggestionRepository, SummarySuggestionRepository>();
-            services.TryAddSingleton<IVacancySuggestionRepository, VacancySuggestionRepository>();
-            services.TryAddSingleton<IMatchRepository, MatchRepository>();
+            services.AddScoped<IAccessService, FreeAccessService>();
+            services.AddScoped<IAuthorizeService, AuthorizeService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ISummaryService, SummaryService>();
+            services.AddScoped<IVacancyService, VacancyService>();
+            services.AddScoped<ISummarySuggestionService, SummarySuggestionService>();
+            services.AddScoped<IVacancySuggestionService, VacancySuggestionService>();
+            services.AddScoped<IMatchService, MatchService>();
+            services.AddScoped<ISkillService, SkillService>();
+            services.AddScoped<ISpecializationService, SpecializationService>();
+
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ISkillRepository, SkillRepository>();
+            services.AddScoped<ISpecializationRepository, SpecializationRepository>();
+            services.AddScoped<ISummaryRepository, SummaryRepository>();
+            services.AddScoped<IVacancyRepository, VacancyRepository>();
+            services.AddScoped<ISummarySuggestionRepository, SummarySuggestionRepository>();
+            services.AddScoped<IVacancySuggestionRepository, VacancySuggestionRepository>();
+            services.AddScoped<IMatchRepository, MatchRepository>();
 
 
             services.AddControllers();

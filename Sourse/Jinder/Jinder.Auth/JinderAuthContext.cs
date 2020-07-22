@@ -11,12 +11,6 @@ namespace Jinder.Auth
         {
         }
 
-        public JinderAuthContext()
-            : base(new DbContextOptionsBuilder().UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=JinderAuth;Trusted_Connection=True;").Options)
-        {
-            Database.EnsureCreated();
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Account>()

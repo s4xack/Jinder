@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -30,9 +31,12 @@ namespace Jinder.Auth
         {
             services.AddControllers();
 
-            services.TryAddSingleton<IAuthorizeService, AuthorizeService>();
-            services.TryAddSingleton<IAccountRepository, AccountRepository>();
-            services.TryAddSingleton<JinderAuthContext, JinderAuthContext>();
+            services.AddDbContext<JinderAuthContext>(options =>
+                options.UseSqlServer(Configuration["connectionString:JinderAuthDB"]));
+
+            services.AddScoped<IAuthorizeService, AuthorizeService>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
