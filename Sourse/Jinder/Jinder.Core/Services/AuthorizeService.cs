@@ -32,7 +32,7 @@ namespace Jinder.Core.Services
         public Boolean Register(CreateAccountDto credentials)
         {
             if (!_authorizeClient.ValidateLogin(credentials.Login).Result)
-                return true;
+                return false;
 
             Int32 userId = _userService.Create(credentials.User).Id;
 
