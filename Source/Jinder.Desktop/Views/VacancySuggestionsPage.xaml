@@ -1,0 +1,24 @@
+﻿<Page x:Class="Jinder.Desktop.Views.VacancySuggestionsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Jinder.Desktop.Views"
+      xmlns:controls="clr-namespace:Jinder.Desktop.Controls"
+      xmlns:viewModels="clr-namespace:Jinder.Desktop.ViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Vacancy suggestions">
+
+    <Page.DataContext>
+        <viewModels:VacancySuggestionsViewModel />
+    </Page.DataContext>
+    <StackPanel>
+        <controls:VacancyControl Vacancy="{Binding VacancySuggestion.Vacancy}"/>
+        <StackPanel>
+            <Button Content="Accept" Command="{Binding AcceptCommand}"/>
+            <Button Content="Skip" Command="{Binding SkipCommand}"/>
+            <Button Content="Reject" Command="{Binding RejectCommand}"/>
+        </StackPanel>
+    </StackPanel>
+</Page>

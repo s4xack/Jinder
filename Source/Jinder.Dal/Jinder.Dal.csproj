@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>Library</OutputType>
+    <LangVersion>8.0</LangVersion>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200711211700_PrepareDataBase.cs" />
+    <Compile Remove="Migrations\20200711211700_PrepareDataBase.Designer.cs" />
+    <Compile Remove="Migrations\20200711212315_FixIndexes.cs" />
+    <Compile Remove="Migrations\20200711212315_FixIndexes.Designer.cs" />
+    <Compile Remove="Migrations\20200711212709_AddNameKeys.cs" />
+    <Compile Remove="Migrations\20200711212709_AddNameKeys.Designer.cs" />
+    <Compile Remove="Migrations\20200711213435_ConfigCascadeDelete.cs" />
+    <Compile Remove="Migrations\20200711213435_ConfigCascadeDelete.Designer.cs" />
+    <Compile Remove="Migrations\20200711220930_PrepareDataBase.cs" />
+    <Compile Remove="Migrations\20200711220930_PrepareDataBase.Designer.cs" />
+    <Compile Remove="Migrations\20200711223104_PrepareDataBase.cs" />
+    <Compile Remove="Migrations\20200711223104_PrepareDataBase.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jinder.Poco\Jinder.Poco.csproj" />
+  </ItemGroup>
+
+</Project>
