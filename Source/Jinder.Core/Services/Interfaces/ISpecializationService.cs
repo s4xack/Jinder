@@ -6,7 +6,7 @@ namespace Jinder.Core.Services
 {
     public interface ISpecializationService
     {
-        IReadOnlyCollection<SpecializationDto> GetAll();
+        IReadOnlyCollection<SpecializationDto> Get();
         SpecializationDto Create(SpecializationDto specialization);
         SpecializationDto DeleteByName(String specializationName);
     }

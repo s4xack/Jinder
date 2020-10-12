@@ -6,7 +6,7 @@ namespace Jinder.Dal.Repositories
 {
     public interface ISummaryRepository
     {
-        IReadOnlyCollection<Summary> GetAll();
+        IReadOnlyCollection<Summary> Get();
         Summary Get(Int32 summaryId);
         Summary GetForUser(Int32 userId);
         Summary Create(Summary summary);

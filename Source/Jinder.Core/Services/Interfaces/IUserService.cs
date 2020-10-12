@@ -6,7 +6,7 @@ namespace Jinder.Core.Services
 {
     public interface IUserService
     {
-        List<UserDto> GetAll();
+        List<UserDto> Get();
         UserDto Get(Int32 userId);
         UserDto Create(CreateUserDto user);
     }

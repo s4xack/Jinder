@@ -16,10 +16,10 @@ namespace Jinder.Core.Services
             _userRepository = userRepository ?? throw new ArgumentException(nameof(userRepository));
         }
 
-        public List<UserDto> GetAll()
+        public List<UserDto> Get()
         {
             return _userRepository
-                .GetAll()
+                .Get()
                 .Select(UserDto.Create)
                 .ToList();
         }

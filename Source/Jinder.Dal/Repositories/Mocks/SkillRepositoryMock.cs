@@ -23,7 +23,7 @@ namespace Jinder.Dal.Repositories.Mocks
         {
         }
 
-        public IReadOnlyCollection<Skill> GetAll()
+        public IReadOnlyCollection<Skill> Get()
         {
             return _skills;
         }

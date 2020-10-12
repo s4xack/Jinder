@@ -6,7 +6,7 @@ namespace Jinder.Dal.Repositories
 {
     public interface ISkillRepository
     {
-        IReadOnlyCollection<Skill> GetAll();
+        IReadOnlyCollection<Skill> Get();
         Skill GetByName(String skillName);
         Skill Add(Skill skill);
         Skill DeleteByName(String skillName);

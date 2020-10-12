@@ -72,12 +72,12 @@ namespace Jinder.Test.Services
         {
             // Arrange
             var expected = _userRepository
-                .GetAll()
+                .Get()
                 .Select(UserDto.Create)
                 .ToList();
 
             // Act
-            var result = _userService.GetAll();
+            var result = _userService.Get();
 
             // Assert
             Assert.That(result != null);

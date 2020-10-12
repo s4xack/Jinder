@@ -16,9 +16,9 @@ namespace Jinder.Core.Services
             _skillRepository = skillRepository ?? throw new ArgumentNullException(nameof(skillRepository));
         }
 
-        public IReadOnlyCollection<SkillDto> GetAll()
+        public IReadOnlyCollection<SkillDto> Get()
         {
-            return _skillRepository.GetAll()
+            return _skillRepository.Get()
                 .Select(SkillDto.Create)
                 .ToList();
         }

@@ -44,7 +44,7 @@ namespace Jinder.Core.Services
 
             var compiler = new SummaryCompiler();
             var rule = new SimpleSummaryRule(vacancy.Specialization, vacancy.Skills);
-            IEnumerable<Summary> summaries = compiler.Compile(_summaryRepository.GetAll(), rule);
+            IEnumerable<Summary> summaries = compiler.Compile(_summaryRepository.Get(), rule);
 
             IReadOnlyCollection<SummarySuggestion> summarySuggestions =
                 summaries.Select(s => new SummarySuggestion(vacancy, s)).ToList();

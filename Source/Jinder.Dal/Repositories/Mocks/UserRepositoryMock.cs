@@ -26,7 +26,7 @@ namespace Jinder.Dal.Repositories.Mocks
         {
         }
 
-        public IReadOnlyCollection<User> GetAll()
+        public IReadOnlyCollection<User> Get()
         {
             return _users;
         }

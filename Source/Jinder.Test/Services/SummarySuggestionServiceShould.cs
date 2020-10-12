@@ -41,7 +41,7 @@ namespace Jinder.Test.Services
             _vacancyRepository = Mock.Of<IVacancyRepository>(
                 x => x.GetForUser(0) == vacancy && x.Get(0) == vacancy);
             _summaryRepository = Mock.Of<ISummaryRepository>(
-                x => x.GetAll() == summaries);
+                x => x.Get() == summaries);
             _summarySuggestionRepository = new SummarySuggestionRepositoryMock(new List<SummarySuggestion>());
 
             _summarySuggestionService = new SummarySuggestionService(_summarySuggestionRepository, _vacancyRepository, _userRepository, _summaryRepository, Mock.Of<IMatchService>());
@@ -54,7 +54,7 @@ namespace Jinder.Test.Services
         {
             // Arrange
             var compiler = new SummaryCompiler();
-            var expected = compiler.Compile(_summaryRepository.GetAll(), _rule);
+            var expected = compiler.Compile(_summaryRepository.Get(), _rule);
 
             // Act
             var result = _summarySuggestionService.SuggestAllForUser(0);

@@ -28,12 +28,12 @@ namespace Jinder.Api.Controllers
         [ProducesResponseType(typeof(List<VacancyDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<List<VacancyDto>> GetAll([FromHeader] Guid token)
+        public ActionResult<List<VacancyDto>> Get([FromHeader] Guid token)
         {
             try
             {
                 ValidateToken(token);
-                return Ok(_vacancyService.GetAll());
+                return Ok(_vacancyService.Get());
             }
             catch (AuthenticationException)
             {

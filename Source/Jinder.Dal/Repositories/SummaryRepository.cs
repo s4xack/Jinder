@@ -16,7 +16,7 @@ namespace Jinder.Dal.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public IReadOnlyCollection<Summary> GetAll()
+        public IReadOnlyCollection<Summary> Get()
         {
             return _context.Summaries
                 .Include(s => s.User)

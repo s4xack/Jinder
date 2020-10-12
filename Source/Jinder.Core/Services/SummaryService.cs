@@ -27,10 +27,10 @@ namespace Jinder.Core.Services
                 specializationRepository ?? throw new ArgumentException(nameof(skillRepository));
         }
 
-        public List<SummaryDto> GetAll()
+        public List<SummaryDto> Get()
         {
             return _summaryRepository
-                .GetAll()
+                .Get()
                 .Select(SummaryDto.Create)
                 .ToList();
         }

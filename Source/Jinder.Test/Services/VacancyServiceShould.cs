@@ -134,12 +134,12 @@ namespace Jinder.Test.Services
         {
             // Arrange
             var expected = _vacancyRepository
-                .GetAll()
+                .Get()
                 .Select(VacancyDto.Create)
                 .ToList();
 
             // Act
-            var result = _vacancyService.GetAll();
+            var result = _vacancyService.Get();
 
             // Assert
             Assert.That(result != null);

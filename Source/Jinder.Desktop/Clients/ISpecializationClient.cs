@@ -9,6 +9,6 @@ namespace Jinder.Desktop.Clients
     public interface ISpecializationClient
     {
         [Get("/api/specialization/get/all")]
-        Task<List<SpecializationDto>> GetAll([Header("token")] Guid token);
+        Task<List<SpecializationDto>> Get([Header("token")] Guid token);
     }
 }

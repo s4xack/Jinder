@@ -6,7 +6,7 @@ namespace Jinder.Dal.Repositories
 {
     public interface IVacancyRepository
     {
-        IReadOnlyCollection<Vacancy> GetAll();
+        IReadOnlyCollection<Vacancy> Get();
         Vacancy Get(Int32 vacancyId);
         Vacancy GetForUser(Int32 userId);
         Vacancy Create(Vacancy vacancy);

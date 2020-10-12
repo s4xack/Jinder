@@ -6,7 +6,7 @@ namespace Jinder.Core.Services
 {
     public interface ISkillService
     {
-        IReadOnlyCollection<SkillDto> GetAll();
+        IReadOnlyCollection<SkillDto> Get();
         SkillDto Create(SkillDto skill);
         SkillDto DeleteByName(String skillName);
     }

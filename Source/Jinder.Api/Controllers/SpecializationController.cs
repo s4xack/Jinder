@@ -26,12 +26,12 @@ namespace Jinder.Api.Controllers
         [ProducesResponseType(typeof(List<SpecializationDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<List<SpecializationDto>> GetAll([FromHeader]Guid token)
+        public ActionResult<List<SpecializationDto>> Get([FromHeader]Guid token)
         {
             try
             {
                 ValidateToken(token);
-                return Ok(_specializationService.GetAll());
+                return Ok(_specializationService.Get());
             }
             catch (AuthenticationException)
             {

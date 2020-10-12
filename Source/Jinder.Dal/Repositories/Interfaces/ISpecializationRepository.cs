@@ -6,7 +6,7 @@ namespace Jinder.Dal.Repositories
 {
     public interface ISpecializationRepository
     {
-        IReadOnlyCollection<Specialization> GetAll();
+        IReadOnlyCollection<Specialization> Get();
         Specialization GetByName(String specializationName);
         Specialization Add(Specialization specialization);
         Specialization DeleteByName(String specializationName);

@@ -6,7 +6,7 @@ namespace Jinder.Core.Services
 {
     public interface IVacancyService
     {
-        List<VacancyDto> GetAll();
+        List<VacancyDto> Get();
         VacancyDto Get(Int32 vacancyId);
         VacancyDto GetForUser(Int32 vacancyId);
         VacancyDto CreateForUser(Int32 userId, CreateVacancyDto vacancyData);

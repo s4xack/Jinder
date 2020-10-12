@@ -16,7 +16,7 @@ namespace Jinder.Dal.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public IReadOnlyCollection<Skill> GetAll()
+        public IReadOnlyCollection<Skill> Get()
         {
             return _context.Skills
                 .Select(s => s.ToModel())

@@ -134,12 +134,12 @@ namespace Jinder.Test.Services
         {
             // Arrange
             var expected = _summaryRepository
-                .GetAll()
+                .Get()
                 .Select(SummaryDto.Create)
                 .ToList();
 
             // Act
-            var result = _summaryService.GetAll();
+            var result = _summaryService.Get();
 
             // Assert
             Assert.That(result != null);

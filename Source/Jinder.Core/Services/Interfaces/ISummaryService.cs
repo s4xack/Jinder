@@ -6,7 +6,7 @@ namespace Jinder.Core.Services
 {
     public interface ISummaryService
     {
-        List<SummaryDto> GetAll();
+        List<SummaryDto> Get();
         SummaryDto Get(Int32 summaryId);
         SummaryDto GetForUser(Int32 userId);
         SummaryDto CreateForUser(Int32 userId, CreateSummaryDto summary);

@@ -10,6 +10,6 @@ namespace Jinder.Desktop.Clients
     public interface ISkillClient
     {
         [Get("/api/skill/get/all")]
-        Task<List<SkillDto>> GetAll([Header("token")] Guid token);
+        Task<List<SkillDto>> Get([Header("token")] Guid token);
     }
 }

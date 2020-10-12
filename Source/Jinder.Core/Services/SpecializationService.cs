@@ -17,9 +17,9 @@ namespace Jinder.Core.Services
                                         throw new ArgumentNullException(nameof(specializationRepository));
         }
 
-        public IReadOnlyCollection<SpecializationDto> GetAll()
+        public IReadOnlyCollection<SpecializationDto> Get()
         {
-            return _specializationRepository.GetAll()
+            return _specializationRepository.Get()
                 .Select(SpecializationDto.Create)
                 .ToList();
         }

@@ -25,12 +25,12 @@ namespace Jinder.Api.Controllers
         [Route("get/all")]
         [ProducesResponseType(typeof(List<UserDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public ActionResult<List<UserDto>> GetAll([FromHeader] Guid token)
+        public ActionResult<List<UserDto>> Get([FromHeader] Guid token)
         {
             try
             {
                 ValidateToken(token);
-                return Ok(_userService.GetAll());
+                return Ok(_userService.Get());
             }
             catch (AuthenticationException)
             {

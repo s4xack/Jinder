@@ -23,7 +23,7 @@ namespace Jinder.Dal.Repositories.Mocks
         }
 
 
-        public IReadOnlyCollection<Vacancy> GetAll()
+        public IReadOnlyCollection<Vacancy> Get()
         {
             return _vacancies;
         }
