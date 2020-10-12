@@ -11,5 +11,10 @@ namespace Jinder.Poco.Models
         {
             Name = name;
         }
+
+        public override Boolean Equals(Object obj)
+        {
+            return obj is Skill other && Id == other.Id;
+        }
     }
 }
